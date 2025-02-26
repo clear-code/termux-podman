@@ -44,7 +44,7 @@ func VersionHandler(w http.ResponseWriter, r *http.Request) {
 			"GoVersion":     running.GoVersion,
 			"KernelVersion": info.Host.Kernel,
 			"MinAPIVersion": version.APIVersion[version.Libpod][version.MinimalAPI].String(),
-			"Os":            goRuntime.GOOS,
+			"Os":            "linux",
 		},
 	}, {
 		Name:    "Conmon",
@@ -68,7 +68,7 @@ func VersionHandler(w http.ResponseWriter, r *http.Request) {
 			Platform: struct {
 				Name string
 			}{
-				Name: fmt.Sprintf("%s/%s/%s-%s", goRuntime.GOOS, goRuntime.GOARCH, info.Host.Distribution.Distribution, info.Host.Distribution.Version),
+				Name: fmt.Sprintf("%s/%s/%s-%s", "linux", goRuntime.GOARCH, info.Host.Distribution.Distribution, info.Host.Distribution.Version),
 			},
 			APIVersion:    fmt.Sprintf("%d.%d", apiVersion.Major, apiVersion.Minor),
 			Arch:          components[0].Details["Arch"],

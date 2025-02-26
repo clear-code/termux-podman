@@ -98,7 +98,7 @@ func hostInfo() (*entities.MachineHostInfo, error) {
 	host := entities.MachineHostInfo{}
 
 	host.Arch = runtime.GOARCH
-	host.OS = runtime.GOOS
+	host.OS = "linux"
 
 	dirs, err := env.GetMachineDirs(provider.VMType())
 	if err != nil {

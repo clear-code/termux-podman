@@ -125,7 +125,7 @@ func (r *Runtime) hostInfo() (*define.HostInfo, error) {
 		MemTotal:           mi.MemTotal,
 		NetworkBackend:     r.config.Network.NetworkBackend,
 		NetworkBackendInfo: r.network.NetworkInfo(),
-		OS:                 runtime.GOOS,
+		OS:                 "linux",
 		RootlessNetworkCmd: r.config.Network.DefaultRootlessNetworkCmd,
 		SwapFree:           mi.SwapFree,
 		SwapTotal:          mi.SwapTotal,

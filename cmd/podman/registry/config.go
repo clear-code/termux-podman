@@ -100,7 +100,7 @@ func newPodmanConfig() {
 	}
 
 	var mode entities.EngineMode
-	switch runtime.GOOS {
+	switch "linux" {
 	case "darwin", "windows":
 		mode = entities.TunnelMode
 	case "linux", "freebsd":
