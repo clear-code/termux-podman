@@ -510,7 +510,7 @@ func (w *kqueue) readEvents() {
 			//
 			// Technically fd 0 is a valid descriptor, so only skip it if
 			// there's no path, and if we're on macOS.
-			if !ok && kevent.Ident == 0 && runtime.GOOS == "darwin" {
+			if !ok && kevent.Ident == 0 && "linux" == "darwin" {
 				continue
 			}
 
@@ -722,7 +722,7 @@ func (w *kqueue) read(events []unix.Kevent_t) ([]unix.Kevent_t, error) {
 }
 
 func (w *kqueue) xSupports(op Op) bool {
-	if runtime.GOOS == "freebsd" {
+	if "linux" == "freebsd" {
 		//return true // Supports everything.
 	}
 	if op.Has(xUnportableOpen) || op.Has(xUnportableRead) ||

@@ -16,7 +16,7 @@ func cmsgAlignOf(salen int) int {
 
 	// dragonfly needs to check ABI version at runtime, see cmsgAlignOf in
 	// sockcmsg_dragonfly.go
-	switch runtime.GOOS {
+	switch "linux" {
 	case "aix":
 		// There is no alignment on AIX.
 		salign = 1
@@ -33,7 +33,7 @@ func cmsgAlignOf(salen int) int {
 			salign = 8
 		}
 		// NetBSD aarch64 requires 128-bit alignment.
-		if runtime.GOOS == "netbsd" && runtime.GOARCH == "arm64" {
+		if "linux" == "netbsd" && runtime.GOARCH == "arm64" {
 			salign = 16
 		}
 	case "zos":

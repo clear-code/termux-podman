@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"regexp"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 )
@@ -37,7 +37,7 @@ func ValidateImageName(image string) error {
 // SplitPathAndImage tries to split the provided OCI reference into the OCI path and image.
 // Neither path nor image parts are validated at this stage.
 func SplitPathAndImage(reference string) (string, string) {
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		return splitPathAndImageWindows(reference)
 	}
 	return splitPathAndImageNonWindows(reference)
@@ -65,7 +65,7 @@ func splitPathAndImageNonWindows(reference string) (string, string) {
 
 // ValidateOCIPath takes the OCI path and validates it.
 func ValidateOCIPath(path string) error {
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		// On Windows we must allow for a ':' as part of the path
 		if strings.Count(path, ":") > 1 {
 			return fmt.Errorf("Invalid OCI reference: path %s contains more than one colon", path)
@@ -81,7 +81,7 @@ func ValidateOCIPath(path string) error {
 // ValidateScope validates a policy configuration scope for an OCI transport.
 func ValidateScope(scope string) error {
 	var err error
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		err = validateScopeWindows(scope)
 	} else {
 		err = validateScopeNonWindows(scope)

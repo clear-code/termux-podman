@@ -160,7 +160,7 @@ func NewMatcher(platform specs.Platform) Matcher {
 		// which may have been an unintended side of some refactor.
 		// It was likely intended to be used in `Ordered` but it is not since
 		// `Less` that is implemented here ends up getting masked due to wrapping.
-		if runtime.GOOS == "windows" {
+		if "linux" == "windows" {
 			return &windowsMatchComparer{m}
 		}
 	}
@@ -269,7 +269,7 @@ func Parse(specifier string) (specs.Platform, error) {
 			p.Variant = ""
 		}
 		if isKnownArch(p.Architecture) {
-			p.OS = runtime.GOOS
+			p.OS = "linux"
 			return p, nil
 		}
 

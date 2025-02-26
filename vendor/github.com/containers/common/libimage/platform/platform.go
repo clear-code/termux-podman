@@ -45,7 +45,7 @@ func Normalize(rawOS, rawArch, rawVariant string) (os, arch, variant string) {
 
 func ToString(os, arch, variant string) string {
 	if os == "" {
-		os = runtime.GOOS
+		os = "linux"
 	}
 	if arch == "" {
 		arch = runtime.GOARCH

@@ -777,7 +777,7 @@ func isClosedConnError(err error) bool {
 	// build tags, so I can't make an http2_windows.go file with
 	// Windows-specific stuff. Fix that and move this, once we
 	// have a way to bundle this into std's net/http somehow.
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		if oe, ok := err.(*net.OpError); ok && oe.Op == "read" {
 			if se, ok := oe.Err.(*os.SyscallError); ok && se.Syscall == "wsarecv" {
 				const WSAECONNABORTED = 10053

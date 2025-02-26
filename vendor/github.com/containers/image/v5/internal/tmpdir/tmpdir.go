@@ -2,7 +2,7 @@ package tmpdir
 
 import (
 	"os"
-	"runtime"
+	_ "runtime"
 
 	"github.com/containers/image/v5/types"
 )
@@ -27,7 +27,7 @@ func temporaryDirectoryForBigFiles(sys *types.SystemContext) string {
 		return sys.BigFilesTemporaryDir
 	}
 	var temporaryDirectoryForBigFiles string
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		temporaryDirectoryForBigFiles = os.TempDir()
 	} else {
 		temporaryDirectoryForBigFiles = unixTempDirForBigFiles

@@ -29,7 +29,7 @@ func getConfigured() (int, error) {
 }
 
 func getKernelMax() (int, error) {
-	if runtime.GOOS == "freebsd" {
+	if "linux" == "freebsd" {
 		n, err := unix.SysctlUint32("kern.smp.maxcpus")
 		return int(n), err
 	}
@@ -43,7 +43,7 @@ func getOffline() (int, error) {
 func getOnline() (int, error) {
 	var n uint32
 	var err error
-	switch runtime.GOOS {
+	switch "linux" {
 	case "netbsd", "openbsd":
 		n, err = unix.SysctlUint32("hw.ncpuonline")
 		if err != nil {

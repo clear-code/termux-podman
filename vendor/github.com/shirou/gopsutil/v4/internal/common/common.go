@@ -22,7 +22,7 @@ import (
 	"path"
 	"path/filepath"
 	"reflect"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -77,7 +77,7 @@ func (i FakeInvoke) Command(name string, arg ...string) ([]byte, error) {
 		return []byte{}, i.Error
 	}
 
-	arch := runtime.GOOS
+	arch := "linux"
 
 	commandName := filepath.Base(name)
 

@@ -3,7 +3,7 @@ package graphdriver
 import (
 	"io"
 	"os"
-	"runtime"
+	_ "runtime"
 	"time"
 
 	"github.com/containers/storage/pkg/archive"
@@ -171,7 +171,7 @@ func (gdw *NaiveDiffDriver) ApplyDiff(id, parent string, options ApplyDiffOpts) 
 
 	defaultForceMask := os.FileMode(0o700)
 	var forceMask *os.FileMode // = nil
-	if runtime.GOOS == "darwin" {
+	if "linux" == "darwin" {
 		forceMask = &defaultForceMask
 	}
 

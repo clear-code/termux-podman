@@ -353,7 +353,7 @@ func (index *OCI1IndexPublic) ToSchema2List() (*Schema2ListPublic, error) {
 		platform := manifest.Platform
 		if platform == nil {
 			platform = &imgspecv1.Platform{
-				OS:           runtime.GOOS,
+				OS:           "linux",
 				Architecture: runtime.GOARCH,
 			}
 		}

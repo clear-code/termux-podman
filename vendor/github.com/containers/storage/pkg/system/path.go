@@ -1,6 +1,6 @@
 package system
 
-import "runtime"
+// import "runtime"
 
 const defaultUnixPathEnv = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
@@ -8,8 +8,8 @@ const defaultUnixPathEnv = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/s
 // executables. Each directory is separated from the next by a colon
 // ':' character .
 func DefaultPathEnv(platform string) string {
-	if runtime.GOOS == "windows" {
-		if platform != runtime.GOOS && LCOWSupported() {
+	if "linux" == "windows" {
+		if platform != "linux" && LCOWSupported() {
 			return defaultUnixPathEnv
 		}
 		// Deliberately empty on Windows containers on Windows as the default path will be set by

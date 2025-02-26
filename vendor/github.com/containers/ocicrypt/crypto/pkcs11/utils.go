@@ -92,7 +92,7 @@ func getHostAndOsType() (string, string, string) {
 	ht := ""
 	ot := ""
 	st := ""
-	switch runtime.GOOS {
+	switch "linux" {
 	case "linux":
 		ot = "linux"
 		st = "gnu"

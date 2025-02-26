@@ -198,7 +198,7 @@ func newExecutablePath(gopath, packagePath string, suffixes ...string) (string, 
 
 	executable := filepath.Join(tmpDir, path.Base(packagePath))
 
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		executable += ".exe"
 	}
 

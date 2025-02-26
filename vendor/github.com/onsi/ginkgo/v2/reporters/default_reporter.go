@@ -56,7 +56,7 @@ func NewDefaultReporter(conf types.ReporterConfig, writer io.Writer) *DefaultRep
 		formatter:    formatter.NewWithNoColorBool(conf.NoColor),
 		lock:         &sync.Mutex{},
 	}
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		reporter.specDenoter = "+"
 		reporter.retryDenoter = "R"
 	}

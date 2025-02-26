@@ -141,7 +141,7 @@ func (r *tarballReference) NewImageSource(ctx context.Context, sys *types.System
 		config.Architecture = runtime.GOARCH
 	}
 	if config.OS == "" {
-		config.OS = runtime.GOOS
+		config.OS = "linux"
 	}
 	config.RootFS = imgspecv1.RootFS{
 		Type:    "layers",

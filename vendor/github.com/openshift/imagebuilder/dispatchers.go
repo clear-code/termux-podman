@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 
@@ -355,7 +355,7 @@ func from(b *Builder, args []string, attributes map[string]bool, flagArgs []stri
 
 	// Windows cannot support a container with no base image.
 	if name == NoBaseImageSpecifier {
-		if runtime.GOOS == "windows" {
+		if "linux" == "windows" {
 			return fmt.Errorf("Windows does not support FROM scratch")
 		}
 	}
@@ -506,7 +506,7 @@ func cmd(b *Builder, args []string, attributes map[string]bool, flagArgs []strin
 	cmdSlice := handleJSONArgs(args, attributes)
 
 	if !attributes["json"] {
-		if runtime.GOOS != "windows" {
+		if "linux" != "windows" {
 			cmdSlice = append([]string{"/bin/sh", "-c"}, cmdSlice...)
 		} else {
 			cmdSlice = append([]string{"cmd", "/S", "/C"}, cmdSlice...)
@@ -539,7 +539,7 @@ func entrypoint(b *Builder, args []string, attributes map[string]bool, flagArgs 
 		b.RunConfig.Entrypoint = nil
 	default:
 		// ENTRYPOINT echo hi
-		if runtime.GOOS != "windows" {
+		if "linux" != "windows" {
 			b.RunConfig.Entrypoint = strslice.StrSlice{"/bin/sh", "-c", parsed[0]}
 		} else {
 			b.RunConfig.Entrypoint = strslice.StrSlice{"cmd", "/S", "/C", parsed[0]}

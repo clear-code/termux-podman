@@ -162,7 +162,7 @@ func RegisterFunc(fptr interface{}, cfn uintptr) {
 					stack++
 				}
 			case reflect.Struct:
-				if runtime.GOOS != "darwin" || (runtime.GOARCH != "amd64" && runtime.GOARCH != "arm64") {
+				if "linux" != "darwin" || (runtime.GOARCH != "amd64" && runtime.GOARCH != "arm64") {
 					panic("purego: struct arguments are only supported on darwin amd64 & arm64")
 				}
 				if arg.Size() == 0 {
@@ -183,7 +183,7 @@ func RegisterFunc(fptr interface{}, cfn uintptr) {
 			}
 		}
 		if ty.NumOut() == 1 && ty.Out(0).Kind() == reflect.Struct {
-			if runtime.GOOS != "darwin" {
+			if "linux" != "darwin" {
 				panic("purego: struct return values only supported on darwin arm64 & amd64")
 			}
 			outType := ty.Out(0)
@@ -219,7 +219,7 @@ func RegisterFunc(fptr interface{}, cfn uintptr) {
 		var numFloats int
 		var numStack int
 		var addStack, addInt, addFloat func(x uintptr)
-		if runtime.GOARCH == "arm64" || runtime.GOOS != "windows" {
+		if runtime.GOARCH == "arm64" || "linux" != "windows" {
 			// Windows arm64 uses the same calling convention as macOS and Linux
 			addStack = func(x uintptr) {
 				stack[numStack] = x
@@ -307,7 +307,7 @@ func RegisterFunc(fptr interface{}, cfn uintptr) {
 				panic("purego: unsupported kind: " + v.Kind().String())
 			}
 		}
-		if runtime.GOARCH == "arm64" || runtime.GOOS != "windows" {
+		if runtime.GOARCH == "arm64" || "linux" != "windows" {
 			// Use the normal arm64 calling convention even on Windows
 			syscall = syscall15Args{
 				cfn,

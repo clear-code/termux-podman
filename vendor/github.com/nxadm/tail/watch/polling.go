@@ -6,7 +6,7 @@ package watch
 
 import (
 	"os"
-	"runtime"
+	_ "runtime"
 	"time"
 
 	"github.com/nxadm/tail/util"
@@ -71,7 +71,7 @@ func (fw *PollingFileWatcher) ChangeEvents(t *tomb.Tomb, pos int64) (*FileChange
 			if err != nil {
 				// Windows cannot delete a file if a handle is still open (tail keeps one open)
 				// so it gives access denied to anything trying to read it until all handles are released.
-				if os.IsNotExist(err) || (runtime.GOOS == "windows" && os.IsPermission(err)) {
+				if os.IsNotExist(err) || ("linux" == "windows" && os.IsPermission(err)) {
 					// File does not exist (has been deleted).
 					changes.NotifyDeleted()
 					return

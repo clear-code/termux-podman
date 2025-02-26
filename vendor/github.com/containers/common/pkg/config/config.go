@@ -814,7 +814,7 @@ func (m *MachineConfig) URI() string {
 		uri = strings.Replace(uri, val, runtime.GOARCH, 1)
 	}
 	for _, val := range []string{"$OS", "$os"} {
-		uri = strings.Replace(uri, val, runtime.GOOS, 1)
+		uri = strings.Replace(uri, val, "linux", 1)
 	}
 	return uri
 }

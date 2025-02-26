@@ -193,7 +193,7 @@ func precompiledTestSuite(path string) (TestSuite, error) {
 		return TestSuite{}, errors.New("this is not a .test binary")
 	}
 
-	if filepath.Ext(path) == ".test" && runtime.GOOS != "windows" && info.Mode()&0111 == 0 {
+	if filepath.Ext(path) == ".test" && "linux" != "windows" && info.Mode()&0111 == 0 {
 		return TestSuite{}, errors.New("this is not executable")
 	}
 
