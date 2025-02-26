@@ -9,7 +9,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"strings"
 
 	"github.com/containers/image/v5/docker/reference"
@@ -544,11 +544,11 @@ func listCredsInCredHelper(credHelper string) (map[string]string, error) {
 // getPathToAuth gets the path of the auth.json file used for reading and writing credentials,
 // and a boolean indicating whether the return value came from an explicit user choice (i.e. not defaults)
 func getPathToAuth(sys *types.SystemContext) (authPath, bool, error) {
-	return getPathToAuthWithOS(sys, runtime.GOOS)
+	return getPathToAuthWithOS(sys, "linux")
 }
 
 // getPathToAuthWithOS is an internal implementation detail of getPathToAuth,
-// it exists only to allow testing it with an artificial runtime.GOOS.
+// it exists only to allow testing it with an artificial "linux".
 func getPathToAuthWithOS(sys *types.SystemContext, goOS string) (authPath, bool, error) {
 	if sys != nil {
 		if sys.AuthFilePath != "" && sys.DockerCompatAuthFilePath != "" {

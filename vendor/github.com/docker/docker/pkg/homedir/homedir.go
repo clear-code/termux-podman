@@ -3,7 +3,7 @@ package homedir
 import (
 	"os"
 	"os/user"
-	"runtime"
+	_ "runtime"
 )
 
 // Get returns the home directory of the current user with the help of
@@ -19,7 +19,7 @@ import (
 // If needing to do nss lookups, do not disable cgo or set osusergo.
 func Get() string {
 	home, _ := os.UserHomeDir()
-	if home == "" && runtime.GOOS != "windows" {
+	if home == "" && "linux" != "windows" {
 		if u, err := user.Current(); err == nil {
 			return u.HomeDir
 		}

@@ -9,7 +9,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"slices"
 
 	"github.com/containers/image/v5/internal/imagedestination/impl"
@@ -162,7 +162,7 @@ func (d *ociImageDestination) blobFileSyncAndRename(blobFile *os.File, blobDiges
 	// On Windows, the “permissions of newly created files” argument to syscall.Open is
 	// ignored and the file is already readable; besides, blobFile.Chmod, i.e. syscall.Fchmod,
 	// always fails on Windows.
-	if runtime.GOOS != "windows" {
+	if "linux" != "windows" {
 		if err := blobFile.Chmod(0644); err != nil {
 			return err
 		}

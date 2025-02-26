@@ -2,14 +2,14 @@ package tlsconfig
 
 import (
 	"crypto/x509"
-	"runtime"
+	_ "runtime"
 )
 
 // SystemCertPool returns a copy of the system cert pool,
 // returns an error if failed to load or empty pool on windows.
 func SystemCertPool() (*x509.CertPool, error) {
 	certpool, err := x509.SystemCertPool()
-	if err != nil && runtime.GOOS == "windows" {
+	if err != nil && "linux" == "windows" {
 		return x509.NewCertPool(), nil
 	}
 	return certpool, err

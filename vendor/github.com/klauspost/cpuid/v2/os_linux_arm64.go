@@ -120,7 +120,7 @@ func detectOS(c *CPUInfo) bool {
 	// The Samsung S9+ kernel reports support for atomics, but not all cores
 	// actually support them, resulting in SIGILL. See issue #28431.
 	// TODO(elias.naur): Only disable the optimization on bad chipsets on android.
-	c.featureSet.setIf(isSet(hwcap, hwcap_ATOMICS) && runtime.GOOS != "android", ATOMICS)
+	c.featureSet.setIf(isSet(hwcap, hwcap_ATOMICS) && "linux" != "android", ATOMICS)
 
 	return true
 }

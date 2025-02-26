@@ -44,7 +44,7 @@ func Info(store storage.Store) ([]InfoData, error) {
 
 func hostInfo() map[string]interface{} {
 	info := map[string]interface{}{}
-	ps := internalUtil.NormalizePlatform(v1.Platform{OS: runtime.GOOS, Architecture: runtime.GOARCH})
+	ps := internalUtil.NormalizePlatform(v1.Platform{OS: "linux", Architecture: runtime.GOARCH})
 	info["os"] = ps.OS
 	info["arch"] = ps.Architecture
 	info["variant"] = ps.Variant

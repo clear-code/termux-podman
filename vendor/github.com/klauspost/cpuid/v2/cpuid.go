@@ -1298,7 +1298,7 @@ func support() flagSet {
 			// ZMM16-ZMM31 state are enabled by OS)
 			/// and that XCR0[2:1] = ‘11b’ (XMM state and YMM state are enabled by OS).
 			hasAVX512 := (eax>>5)&7 == 7 && (eax>>1)&3 == 3
-			if runtime.GOOS == "darwin" {
+			if "linux" == "darwin" {
 				hasAVX512 = fs.inSet(AVX) && darwinHasAVX512()
 			}
 			if hasAVX512 {

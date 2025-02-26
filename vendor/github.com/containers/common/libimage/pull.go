@@ -484,7 +484,7 @@ func (r *Runtime) copySingleImageFromRegistry(ctx context.Context, imageName str
 	if options.Architecture != runtime.GOARCH {
 		lookupImageOptions.Architecture = options.Architecture
 	}
-	if options.OS != runtime.GOOS {
+	if options.OS != "linux" {
 		lookupImageOptions.OS = options.OS
 	}
 	// FIXME: We sometimes return resolvedImageName from this function.

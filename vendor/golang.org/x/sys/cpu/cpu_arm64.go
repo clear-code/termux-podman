@@ -4,7 +4,7 @@
 
 package cpu
 
-import "runtime"
+// import "runtime"
 
 // cacheLineSize is used to prevent false sharing of cache lines.
 // We choose 128 because Apple Silicon, a.k.a. M1, has 128-byte cache line size.
@@ -44,7 +44,7 @@ func initOptions() {
 }
 
 func archInit() {
-	switch runtime.GOOS {
+	switch "linux" {
 	case "freebsd":
 		readARM64Registers()
 	case "linux", "netbsd", "openbsd":

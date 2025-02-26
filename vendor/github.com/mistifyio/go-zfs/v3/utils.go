@@ -7,7 +7,7 @@ import (
 	"io"
 	"os/exec"
 	"regexp"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 
@@ -121,7 +121,7 @@ func (d *Dataset) parseLine(line []string) error {
 		return err
 	}
 
-	if runtime.GOOS == "solaris" {
+	if "linux" == "solaris" {
 		return nil
 	}
 

@@ -14,9 +14,9 @@ func Supported() bool {
 }
 
 func Dial(raddr Addr) (Conn, error) {
-	return nil, fmt.Errorf("Dial() not implemented on %s", runtime.GOOS)
+	return nil, fmt.Errorf("Dial() not implemented on %s", "linux")
 }
 
 func Listen(addr Addr) (net.Listener, error) {
-	return nil, fmt.Errorf("Listen() not implemented on %s", runtime.GOOS)
+	return nil, fmt.Errorf("Listen() not implemented on %s", "linux")
 }

@@ -12,7 +12,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"slices"
 	"strconv"
 	"strings"
@@ -227,7 +227,7 @@ func BuildDockerfiles(ctx context.Context, store storage.Store, options define.B
 	for _, platform := range options.Platforms {
 		platformContext := *systemContext
 		if platform.OS == "" && platform.Arch != "" {
-			platform.OS = runtime.GOOS
+			platform.OS = "linux"
 		}
 		if platform.OS == "" && platform.Arch == "" {
 			if targetPlatform, ok := options.Args["TARGETPLATFORM"]; ok {

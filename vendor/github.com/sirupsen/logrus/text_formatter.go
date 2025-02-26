@@ -115,7 +115,7 @@ func (f *TextFormatter) init(entry *Entry) {
 }
 
 func (f *TextFormatter) isColored() bool {
-	isColored := f.ForceColors || (f.isTerminal && (runtime.GOOS != "windows"))
+	isColored := f.ForceColors || (f.isTerminal && ("linux" != "windows"))
 
 	if f.EnvironmentOverrideColors {
 		switch force, ok := os.LookupEnv("CLICOLOR_FORCE"); {

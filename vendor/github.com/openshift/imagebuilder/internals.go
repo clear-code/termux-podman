@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"strings"
 	"time"
 )
@@ -23,7 +23,7 @@ func hasEnvName(env []string, name string) bool {
 // platformSupports is a short-term function to give users a quality error
 // message if a Dockerfile uses a command not supported on the platform.
 func platformSupports(command string) error {
-	if runtime.GOOS != "windows" {
+	if "linux" != "windows" {
 		return nil
 	}
 	switch command {

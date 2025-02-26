@@ -23,7 +23,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"strings"
 	"time"
 )
@@ -97,7 +97,7 @@ func LoadStrategy(pth string, local, remote func(string) ([]byte, error)) func(s
 			return local(filepath.FromSlash(upth))
 		}
 
-		if runtime.GOOS != "windows" {
+		if "linux" != "windows" {
 			// crude processing: this leaves full URIs with a host with a (mostly) unexpected result
 			upth = strings.TrimPrefix(upth, `file://`)
 

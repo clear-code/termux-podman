@@ -64,7 +64,7 @@ func collectFileInfo(sourceDir string, idMappings *idtools.IDMappings) (*FileInf
 		// See https://github.com/golang/go/issues/9168 - bug in filepath.Join.
 		// Temporary workaround. If the returned path starts with two backslashes,
 		// trim it down to a single backslash. Only relevant on Windows.
-		if runtime.GOOS == "windows" {
+		if "linux" == "windows" {
 			if strings.HasPrefix(relPath, `\\`) {
 				relPath = relPath[1:]
 			}

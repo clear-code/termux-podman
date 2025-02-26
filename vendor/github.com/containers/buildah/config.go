@@ -141,7 +141,7 @@ func (b *Builder) fixupConfig(sys *types.SystemContext) {
 		if sys != nil && sys.OSChoice != "" {
 			b.SetOS(sys.OSChoice)
 		} else {
-			b.SetOS(runtime.GOOS)
+			b.SetOS("linux")
 		}
 	}
 	if b.Architecture() == "" {

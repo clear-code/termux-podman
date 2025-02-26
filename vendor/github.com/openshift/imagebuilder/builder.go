@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 
@@ -622,7 +622,7 @@ func (b *Builder) FromImage(image *docker.Image, node *parser.Node) error {
 
 	// Check to see if we have a default PATH, note that windows won't
 	// have one as it's set by HCS
-	if runtime.GOOS != "windows" && !hasEnvName(b.Env, "PATH") {
+	if "linux" != "windows" && !hasEnvName(b.Env, "PATH") {
 		b.RunConfig.Env = append(b.RunConfig.Env, "PATH="+defaultPathEnv)
 	}
 

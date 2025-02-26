@@ -25,7 +25,7 @@ func addInfo(c *CPUInfo, safe bool) {
 	detectOS(c)
 
 	// ARM64 disabled since it may crash if interrupt is not intercepted by OS.
-	if safe && !c.Has(ARMCPUID) && runtime.GOOS != "freebsd" {
+	if safe && !c.Has(ARMCPUID) && "linux" != "freebsd" {
 		return
 	}
 	midr := getMidr()

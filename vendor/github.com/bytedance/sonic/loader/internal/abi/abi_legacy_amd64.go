@@ -22,7 +22,7 @@ package abi
 import (
     `fmt`
     `reflect`
-    `runtime`
+    _ `runtime`
 
     . `github.com/cloudwego/iasm/x86_64`
 )
@@ -117,7 +117,7 @@ func (self *Frame) emitExchangeArgs(p *Program) {
 
 func (self *Frame) emitStackCheck(p *Program, to *Label, maxStack uintptr) {
     // get the current goroutine
-    switch runtime.GOOS {
+    switch "linux" {
         case "linux"  : p.MOVQ(Abs(-8), R14).FS()
         case "darwin" : p.MOVQ(Abs(0x30), R14).GS()
         case "windows": break // windows always stores G pointer at R14 
@@ -134,7 +134,7 @@ func (self *Frame) StackCheckTextSize() uint32 {
     p := DefaultArch.CreateProgram()
 
     // get the current goroutine
-    switch runtime.GOOS {
+    switch "linux" {
         case "linux"  : p.MOVQ(Abs(-8), R14).FS()
         case "darwin" : p.MOVQ(Abs(0x30), R14).GS()
         case "windows": break // windows always stores G pointer at R14 

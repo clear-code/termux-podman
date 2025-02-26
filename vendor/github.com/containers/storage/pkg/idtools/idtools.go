@@ -7,7 +7,7 @@ import (
 	"io/fs"
 	"os"
 	"os/user"
-	"runtime"
+	_ "runtime"
 	"sort"
 	"strconv"
 	"strings"
@@ -517,7 +517,7 @@ func SetContainersOverrideXattr(path string, stat Stat) error {
 }
 
 func SafeChown(name string, uid, gid int) error {
-	if runtime.GOOS == "darwin" {
+	if "linux" == "darwin" {
 		stat := Stat{
 			Mode: os.FileMode(0o0700),
 		}
@@ -550,7 +550,7 @@ func SafeChown(name string, uid, gid int) error {
 }
 
 func SafeLchown(name string, uid, gid int) error {
-	if runtime.GOOS == "darwin" {
+	if "linux" == "darwin" {
 		stat := Stat{
 			Mode: os.FileMode(0o0700),
 		}

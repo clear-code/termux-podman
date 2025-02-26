@@ -3,7 +3,7 @@ package sdk
 import (
 	"crypto/tls"
 	"net"
-	"runtime"
+	_ "runtime"
 
 	"github.com/docker/go-connections/sockets"
 )
@@ -17,7 +17,7 @@ func newTCPListener(address, pluginName, daemonDir string, tlsConfig *tls.Config
 	addr := listener.Addr().String()
 
 	var specDir string
-	if runtime.GOOS == "windows" {
+	if "linux" == "windows" {
 		specDir, err = createPluginSpecDirWindows(pluginName, addr, daemonDir)
 	} else {
 		specDir, err = createPluginSpecDirUnix(pluginName, addr)

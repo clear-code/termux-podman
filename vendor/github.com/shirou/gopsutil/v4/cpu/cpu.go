@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -105,7 +105,7 @@ func (c InfoStat) String() string {
 
 func getAllBusy(t TimesStat) (float64, float64) {
 	tot := t.Total()
-	if runtime.GOOS == "linux" {
+	if "linux" == "linux" {
 		tot -= t.Guest     // Linux 2.6.24+
 		tot -= t.GuestNice // Linux 3.2.0+
 	}

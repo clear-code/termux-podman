@@ -33,8 +33,8 @@ import (
 // So we don't need to access the ARM registers to detect platform information
 // by ourselves. We can just parse these information from /proc/cpuinfo
 func getCPUInfo(pattern string) (info string, err error) {
-	if runtime.GOOS != "linux" {
-		return "", fmt.Errorf("getCPUInfo for OS %s not implemented", runtime.GOOS)
+	if "linux" != "linux" {
+		return "", fmt.Errorf("getCPUInfo for OS %s not implemented", "linux")
 	}
 
 	cpuinfo, err := os.Open("/proc/cpuinfo")
@@ -168,13 +168,13 @@ func WantedPlatforms(ctx *types.SystemContext) []imgspecv1.Platform {
 		// ctx.ArchitectureChoice == runtime.GOARCH, because we have no idea whether the runtime.GOARCH
 		// value is relevant to the use case, and if we do autodetect a variant,
 		// ctx.VariantChoice can't be used to override it back to "".
-		wantedVariant = getCPUVariant(runtime.GOOS, runtime.GOARCH)
+		wantedVariant = getCPUVariant("linux", runtime.GOARCH)
 	}
 	if ctx != nil && ctx.VariantChoice != "" {
 		wantedVariant = ctx.VariantChoice
 	}
 
-	wantedOS := runtime.GOOS
+	wantedOS := "linux"
 	if ctx != nil && ctx.OSChoice != "" {
 		wantedOS = ctx.OSChoice
 	}

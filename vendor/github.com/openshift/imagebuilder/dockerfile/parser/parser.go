@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"io"
 	"regexp"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 	"unicode"
@@ -118,7 +118,7 @@ var (
 const DefaultEscapeToken = '\\'
 
 // defaultPlatformToken is the platform assumed for the build if not explicitly provided
-var defaultPlatformToken = runtime.GOOS
+var defaultPlatformToken = "linux"
 
 var (
 	// Directives allowed to contain heredocs
@@ -158,7 +158,7 @@ func (d *Directive) setEscapeToken(s string) error {
 // setPlatformToken sets the default platform for pulling images in a Dockerfile.
 func (d *Directive) setPlatformToken(s string) error {
 	s = strings.ToLower(s)
-	valid := []string{runtime.GOOS}
+	valid := []string{"linux"}
 	if system.LCOWSupported() {
 		valid = append(valid, "linux")
 	}

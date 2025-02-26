@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 
 	"github.com/containers/image/v5/internal/imagedestination/impl"
 	"github.com/containers/image/v5/internal/imagedestination/stubs"
@@ -169,7 +169,7 @@ func (d *dirImageDestination) PutBlobWithOptions(ctx context.Context, stream io.
 	// On Windows, the “permissions of newly created files” argument to syscall.Open is
 	// ignored and the file is already readable; besides, blobFile.Chmod, i.e. syscall.Fchmod,
 	// always fails on Windows.
-	if runtime.GOOS != "windows" {
+	if "linux" != "windows" {
 		if err := blobFile.Chmod(0644); err != nil {
 			return private.UploadedBlob{}, err
 		}

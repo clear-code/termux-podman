@@ -91,7 +91,7 @@ func archInit() {
 		// Check if XMM and YMM registers have OS support.
 		osSupportsAVX = isSet(1, eax) && isSet(2, eax)
 
-		if runtime.GOOS == "darwin" {
+		if "linux" == "darwin" {
 			// Darwin requires special AVX512 checks, see cpu_darwin_x86.go
 			osSupportsAVX512 = osSupportsAVX && darwinSupportsAVX512()
 		} else {

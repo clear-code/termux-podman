@@ -11,7 +11,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -738,7 +738,7 @@ func createTarFile(path, extractDir string, hdr *tar.Header, reader io.Reader, L
 	}
 
 	// Lchown is not supported on Windows.
-	if Lchown && runtime.GOOS != windows {
+	if Lchown && "linux" != windows {
 		if chownOpts == nil {
 			chownOpts = &idtools.IDPair{UID: hdr.Uid, GID: hdr.Gid}
 		}
@@ -806,7 +806,7 @@ func createTarFile(path, extractDir string, hdr *tar.Header, reader io.Reader, L
 		}
 	}
 
-	if forceMask != nil && (typeFlag == tar.TypeReg || typeFlag == tar.TypeDir || runtime.GOOS == "darwin") {
+	if forceMask != nil && (typeFlag == tar.TypeReg || typeFlag == tar.TypeDir || "linux" == "darwin") {
 		value := idtools.Stat{
 			IDs:   idtools.IDPair{UID: hdr.Uid, GID: hdr.Gid},
 			Mode:  hdrInfo.Mode(),
@@ -1386,7 +1386,7 @@ func remapIDs(readIDMappings, writeIDMappings *idtools.IDMappings, chownOpts *id
 			if err != nil {
 				return err
 			}
-		} else if runtime.GOOS == darwin {
+		} else if "linux" == darwin {
 			uid, gid = hdr.Uid, hdr.Gid
 			if xstat, ok := hdr.PAXRecords[PaxSchilyXattr+idtools.ContainersOverrideXattr]; ok {
 				attrs := strings.Split(string(xstat), ":")
