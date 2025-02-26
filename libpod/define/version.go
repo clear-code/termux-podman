@@ -54,7 +54,7 @@ func GetVersion() (Version, error) {
 		BuiltTime:   time.Unix(buildTime, 0).Format(time.ANSIC),
 		Built:       buildTime,
 		BuildOrigin: buildOrigin,
-		OsArch:      runtime.GOOS + "/" + runtime.GOARCH,
-		Os:          runtime.GOOS,
+		OsArch:      "linux" + "/" + runtime.GOARCH,
+		Os:          "linux",
 	}, nil
 }

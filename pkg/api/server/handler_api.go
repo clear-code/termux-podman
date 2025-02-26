@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
-	"runtime"
+	_ "runtime"
 
 	"github.com/containers/podman/v5/version"
 	"github.com/sirupsen/logrus"
@@ -49,7 +49,7 @@ func (s *APIServer) apiWrapper(h http.HandlerFunc, w http.ResponseWriter, r *htt
 
 	lv := version.APIVersion[version.Libpod][version.CurrentAPI].String()
 	w.Header().Set("Libpod-API-Version", lv)
-	w.Header().Set("Server", "Libpod/"+lv+" ("+runtime.GOOS+")")
+	w.Header().Set("Server", "Libpod/"+lv+" (linux)")
 
 	if s.CorsHeaders != "" {
 		w.Header().Set("Access-Control-Allow-Origin", s.CorsHeaders)

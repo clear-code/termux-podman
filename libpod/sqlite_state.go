@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	goruntime "runtime"
+	_ "runtime"
 	"strings"
 	"time"
 
@@ -322,7 +322,7 @@ func (s *SQLiteState) ValidateDBConfig(runtime *Runtime) (defErr error) {
 
 	var (
 		dbOS, staticDir, tmpDir, graphRoot, runRoot, graphDriver, volumePath string
-		runtimeOS                                                            = goruntime.GOOS
+		runtimeOS                                                            = "linux"
 		runtimeStaticDir                                                     = filepath.Clean(s.runtime.config.Engine.StaticDir)
 		runtimeTmpDir                                                        = filepath.Clean(s.runtime.config.Engine.TmpDir)
 		runtimeGraphRoot                                                     = filepath.Clean(s.runtime.StorageConfig().GraphRoot)

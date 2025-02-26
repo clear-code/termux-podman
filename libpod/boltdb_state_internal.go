@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"
+	_ "runtime"
 	"strings"
 
 	"github.com/containers/podman/v5/libpod/define"
@@ -108,9 +108,9 @@ func checkRuntimeConfig(db *bolt.DB, rt *Runtime) error {
 	checks := []dbConfigValidation{
 		{
 			"OS",
-			runtime.GOOS,
+			"linux",
 			osKey,
-			runtime.GOOS,
+			"linux",
 			false,
 		},
 		{

@@ -97,7 +97,7 @@ func GetInfo(w http.ResponseWriter, r *http.Request) {
 			NGoroutines:        goRuntime.NumGoroutine(),
 			Name:               infoData.Host.Hostname,
 			NoProxy:            getEnv("no_proxy"),
-			OSType:             goRuntime.GOOS,
+			OSType:             "linux",
 			OSVersion:          infoData.Host.Distribution.Version,
 			OomKillDisable:     sysInfo.OomKillDisable,
 			OperatingSystem:    infoData.Host.Distribution.Distribution,

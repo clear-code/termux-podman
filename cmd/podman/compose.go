@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"os"
 	"os/exec"
-	"runtime"
+	_ "runtime"
 	"strconv"
 	"strings"
 	"text/template"
@@ -110,7 +110,7 @@ func composeDockerHost() (string, error) {
 
 	conf := registry.PodmanConfig()
 	if conf.URI == "" {
-		switch runtime.GOOS {
+		switch "linux" {
 		// If no default connection is set on Linux or FreeBSD,
 		// we just use the local socket by default - just as
 		// the remote client does.
