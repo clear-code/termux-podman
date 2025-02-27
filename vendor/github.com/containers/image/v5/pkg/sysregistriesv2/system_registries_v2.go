@@ -15,7 +15,7 @@ import (
 	"github.com/containers/image/v5/docker/reference"
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/containers/storage/pkg/regexp"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/exp/maps"
@@ -558,7 +558,7 @@ type configWrapper struct {
 
 // newConfigWrapper returns a configWrapper for the specified SystemContext.
 func newConfigWrapper(ctx *types.SystemContext) configWrapper {
-	return newConfigWrapperWithHomeDir(ctx, homedir.Get())
+	return newConfigWrapperWithHomeDir(ctx, "@TERMUX_HOME@")
 }
 
 // newConfigWrapperWithHomeDir is an internal implementation detail of newConfigWrapper,

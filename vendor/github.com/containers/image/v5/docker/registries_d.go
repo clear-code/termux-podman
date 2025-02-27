@@ -14,7 +14,7 @@ import (
 	"github.com/containers/image/v5/internal/rootless"
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/opencontainers/go-digest"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
@@ -85,7 +85,7 @@ func loadRegistryConfiguration(sys *types.SystemContext) (*registryConfiguration
 
 // registriesDirPath returns a path to registries.d
 func registriesDirPath(sys *types.SystemContext) string {
-	return registriesDirPathWithHomeDir(sys, homedir.Get())
+	return registriesDirPathWithHomeDir(sys, "@TERMUX_HOME@")
 }
 
 // registriesDirPathWithHomeDir is an internal implementation detail of registriesDirPath,
@@ -195,7 +195,7 @@ func (config *registryConfiguration) lookasideStorageBaseURL(dr dockerReference,
 // builtinDefaultLookasideStorageDir returns default signature storage URL as per euid
 func builtinDefaultLookasideStorageDir(euid int) *url.URL {
 	if euid != 0 {
-		return &url.URL{Scheme: "file", Path: filepath.Join(homedir.Get(), defaultUserDockerDir)}
+		return &url.URL{Scheme: "file", Path: filepath.Join("@TERMUX_HOME@", defaultUserDockerDir)}
 	}
 	return &url.URL{Scheme: "file", Path: defaultDockerDir}
 }

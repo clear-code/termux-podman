@@ -200,11 +200,7 @@ func defaultConfig() (*Config, error) {
 	// NOTE: For now we want Windows to use system locations.
 	// GetRootlessUID == -1 on Windows, so exclude negative range
 	if unshare.GetRootlessUID() > 0 {
-		configHome, err := homedir.GetConfigHome()
-		if err != nil {
-			return nil, err
-		}
-		sigPath := filepath.Join(configHome, DefaultRootlessSignaturePolicyPath)
+		sigPath := filepath.Join("@TERMUX_HOME@/.config", DefaultRootlessSignaturePolicyPath)
 		defaultEngineConfig.SignaturePolicyPath = sigPath
 		if err := fileutils.Exists(sigPath); err != nil {
 			if err := fileutils.Exists(DefaultSignaturePolicyPath); err == nil {
@@ -693,7 +689,7 @@ func getDefaultSSHConfig() string {
 	if path, ok := os.LookupEnv("CONTAINERS_SSH_CONF"); ok {
 		return path
 	}
-	dirname := homedir.Get()
+	dirname := "@TERMUX_HOME@"
 	return filepath.Join(dirname, ".ssh", "config")
 }
 

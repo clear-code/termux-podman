@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/containers/storage/pkg/unshare"
 	"github.com/hashicorp/go-multierror"
 )
@@ -66,11 +66,7 @@ func ModuleDirectories() ([]string, error) { // Public API for shell completions
 	}
 
 	// Prepend the user modules dir.
-	configHome, err := homedir.GetConfigHome()
-	if err != nil {
-		return nil, err
-	}
-	return append([]string{filepath.Join(configHome, moduleSubdir)}, modules...), nil
+	return append([]string{filepath.Join("@TERMUX_HOME@/.config", moduleSubdir)}, modules...), nil
 }
 
 // Resolve the specified path to a module.

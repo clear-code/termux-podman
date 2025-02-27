@@ -13,7 +13,7 @@ import (
 	"github.com/containers/common/pkg/config"
 	"github.com/containers/common/pkg/machine"
 	"github.com/containers/storage"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/containers/storage/pkg/unshare"
 )
 
@@ -46,12 +46,7 @@ func getDefaultCNIConfigDir() (string, error) {
 		return cniConfigDir, nil
 	}
 
-	configHome, err := homedir.GetConfigHome()
-	if err != nil {
-		return "", err
-	}
-
-	return filepath.Join(configHome, cniConfigDirRootless), nil
+	return filepath.Join("@TERMUX_HOME@/.config", cniConfigDirRootless), nil
 }
 
 func networkBackendFromStore(store storage.Store, conf *config.Config) (backend types.NetworkBackend, err error) {

@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/sirupsen/logrus"
 )
 
@@ -41,7 +41,7 @@ func DefaultConfigFile() (string, error) {
 	if configHome := os.Getenv("XDG_CONFIG_HOME"); configHome != "" {
 		return filepath.Join(configHome, "containers/storage.conf"), nil
 	}
-	home := homedir.Get()
+	home := "@TERMUX_HOME@"
 	if home == "" {
 		return "", errors.New("cannot determine user's homedir")
 	}

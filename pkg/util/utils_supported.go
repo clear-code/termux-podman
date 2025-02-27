@@ -22,7 +22,7 @@ func GetRootlessRuntimeDir() (string, error) {
 
 // GetRootlessConfigHomeDir returns the config home directory when running as non root
 func GetRootlessConfigHomeDir() (string, error) {
-	return homedir.GetConfigHome()
+	return "@TERMUX_HOME@/.config", nil
 }
 
 // GetRootlessPauseProcessPidPath returns the path to the file that holds the pid for

@@ -27,7 +27,7 @@ import (
 	"github.com/containers/image/v5/pkg/tlsclientconfig"
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/docker/distribution/registry/api/errcode"
 	v2 "github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/go-connections/tlsconfig"
@@ -158,7 +158,7 @@ func dockerCertDir(sys *types.SystemContext, hostPort string) (string, error) {
 		fullCertDirPath string
 	)
 
-	for _, perHostCertDir := range append([]certPath{{path: filepath.Join(homedir.Get(), homeCertDir), absolute: false}}, perHostCertDirs...) {
+	for _, perHostCertDir := range append([]certPath{{path: filepath.Join("@TERMUX_HOME@", homeCertDir), absolute: false}}, perHostCertDirs...) {
 		if sys != nil && sys.RootForImplicitAbsolutePaths != "" && perHostCertDir.absolute {
 			hostCertDir = filepath.Join(sys.RootForImplicitAbsolutePaths, perHostCertDir.path)
 		} else {

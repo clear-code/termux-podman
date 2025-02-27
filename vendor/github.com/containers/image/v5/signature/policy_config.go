@@ -25,7 +25,7 @@ import (
 	"github.com/containers/image/v5/transports"
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/containers/storage/pkg/regexp"
 )
 
@@ -60,7 +60,7 @@ func DefaultPolicy(sys *types.SystemContext) (*Policy, error) {
 
 // defaultPolicyPath returns a path to the relevant policy of the system, or an error if the policy is missing.
 func defaultPolicyPath(sys *types.SystemContext) (string, error) {
-	policyFilePath, err := defaultPolicyPathWithHomeDir(sys, homedir.Get(), systemDefaultPolicyPath)
+	policyFilePath, err := defaultPolicyPathWithHomeDir(sys, "@TERMUX_HOME@", systemDefaultPolicyPath)
 	if err != nil {
 		return "", err
 	}

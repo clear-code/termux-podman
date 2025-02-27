@@ -23,7 +23,7 @@ import (
 	// https://github.com/containers/podman/issues/23575
 	"github.com/containers/common/pkg/config"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/pkg/sftp"
 	"github.com/sirupsen/logrus"
 	"github.com/skeema/knownhosts"
@@ -306,7 +306,7 @@ func ValidateAndConfigure(uri *url.URL, iden string, insecureIsMachineConnection
 		return nil, err
 	}
 
-	keyFilePath := filepath.Join(homedir.Get(), ".ssh", "known_hosts")
+	keyFilePath := filepath.Join("@TERMUX_HOME@", ".ssh", "known_hosts")
 	known, err := knownhosts.NewDB(keyFilePath)
 	if err != nil {
 		if !errors.Is(err, os.ErrNotExist) {
@@ -410,7 +410,7 @@ func getUDS(uri *url.URL, iden string) (string, error) {
 
 // addKnownHostsEntry adds (host, pubKey) to user’s known_hosts.
 func addKnownHostsEntry(host string, pubKey ssh.PublicKey) error {
-	hd := homedir.Get()
+	hd := "@TERMUX_HOME@"
 	known := filepath.Join(hd, ".ssh", "known_hosts")
 	f, err := os.OpenFile(known, os.O_APPEND|os.O_WRONLY, 0o600)
 	if err != nil {

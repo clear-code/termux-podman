@@ -5,7 +5,7 @@ import (
 	"os/user"
 	"path/filepath"
 
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 )
 
 // DangerousHostPath validates if a host path is dangerous and should not be modified
@@ -37,7 +37,7 @@ func DangerousHostPath(path string) (bool, error) {
 		"/var/log":    true,
 	}
 
-	if home := homedir.Get(); home != "" {
+	if home := "@TERMUX_HOME@"; home != "" {
 		excludePaths[home] = true
 	}
 

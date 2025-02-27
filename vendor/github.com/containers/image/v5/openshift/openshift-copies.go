@@ -20,7 +20,7 @@ import (
 
 	"dario.cat/mergo"
 	"github.com/containers/image/v5/internal/multierr"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 )
@@ -91,7 +91,7 @@ func defaultClientConfig() clientConfig {
 	return clientConfig
 }
 
-var recommendedHomeFile = path.Join(homedir.Get(), ".kube/config")
+var recommendedHomeFile = path.Join("@TERMUX_HOME@", ".kube/config")
 
 // newOpenShiftClientConfigLoadingRules is a modified copy of openshift/origin/pkg/cmd/cli/config.NewOpenShiftClientConfigLoadingRules.
 // NewOpenShiftClientConfigLoadingRules returns file priority loading rules for OpenShift.

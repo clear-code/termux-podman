@@ -17,7 +17,7 @@ import (
 	"github.com/containers/image/v5/pkg/sysregistriesv2"
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/sirupsen/logrus"
 )
 
@@ -88,7 +88,7 @@ func systemContextWithOptions(sys *types.SystemContext, authFile, dockerCompatAu
 		sys = &types.SystemContext{}
 	}
 
-	defaultDockerConfigPath := filepath.Join(homedir.Get(), ".docker", "config.json")
+	defaultDockerConfigPath := filepath.Join("@TERMUX_HOME@", ".docker", "config.json")
 	switch {
 	case authFile != "" && dockerCompatAuthFile != "":
 		return nil, errors.New("options for paths to the credential file and to the Docker-compatible credential file can not be set simultaneously")
