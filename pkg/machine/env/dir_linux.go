@@ -7,7 +7,7 @@ import (
 
 func getRuntimeDir() (string, error) {
 	if !rootless.IsRootless() {
-		return "/run", nil
+		return "@TERMUX_PREFIX@/run", nil
 	}
 	return util.GetRootlessRuntimeDir()
 }

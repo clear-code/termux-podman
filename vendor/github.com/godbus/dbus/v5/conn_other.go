@@ -79,7 +79,7 @@ func getRuntimeDirectory() (string, error) {
 	if currentUser, err := user.Current(); err != nil {
 		return "", err
 	} else {
-		return fmt.Sprintf("/run/user/%s", currentUser.Uid), nil
+		return fmt.Sprintf("@TERMUX_PREFIX@/run/user/%s", currentUser.Uid), nil
 	}
 }
 
