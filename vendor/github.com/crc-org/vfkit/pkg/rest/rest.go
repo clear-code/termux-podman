@@ -46,7 +46,7 @@ func (ep *Endpoint) ToCmdLine() ([]string, error) {
 	args := []string{"--restful-uri"}
 	switch ep.Scheme {
 	case Unix:
-		args = append(args, fmt.Sprintf("unix://%s", ep.Path))
+		args = append(args, fmt.Sprintf("unix://@TERMUX_PREFIX@%s", ep.Path))
 	case TCP:
 		args = append(args, fmt.Sprintf("tcp://%s%s", ep.Host, ep.Path))
 	case None:

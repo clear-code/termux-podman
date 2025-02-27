@@ -50,7 +50,7 @@ func (ic *ContainerEngine) Info(ctx context.Context) (*define.Info, error) {
 	}
 
 	// check if the unix path exits, if not unix socket we always we assume it exists, i.e. tcp socket
-	path, found := strings.CutPrefix(info.Host.RemoteSocket.Path, "unix://")
+	path, found := strings.CutPrefix(info.Host.RemoteSocket.Path, "unix://@TERMUX_PREFIX@")
 	if found {
 		err := fileutils.Exists(path)
 		info.Host.RemoteSocket.Exists = err == nil
