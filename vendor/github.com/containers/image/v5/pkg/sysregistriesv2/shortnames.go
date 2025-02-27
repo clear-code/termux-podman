@@ -13,7 +13,7 @@ import (
 	"github.com/containers/image/v5/internal/multierr"
 	"github.com/containers/image/v5/internal/rootless"
 	"github.com/containers/image/v5/types"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/containers/storage/pkg/lockfile"
 	"github.com/sirupsen/logrus"
 )
@@ -38,12 +38,8 @@ func shortNameAliasesConfPath(ctx *types.SystemContext) (string, error) {
 	}
 
 	// Rootless user
-	cacheRoot, err := homedir.GetCacheHome()
-	if err != nil {
-		return "", err
-	}
 
-	return filepath.Join(cacheRoot, userShortNamesFile), nil
+	return filepath.Join("@TERMUX_HOME@/.cache", userShortNamesFile), nil
 }
 
 // shortNameAliasConf is a subset of the `V2RegistriesConf` format.  It's used in the

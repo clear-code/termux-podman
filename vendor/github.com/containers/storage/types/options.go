@@ -290,10 +290,7 @@ func getRootlessStorageOpts(systemOpts StoreOptions) (StoreOptions, error) {
 
 	rootlessUID := unshare.GetRootlessUID()
 
-	dataDir, err := homedir.GetDataHome()
-	if err != nil {
-		return opts, err
-	}
+	dataDir := "@TERMUX_HOME@/.local/share"
 
 	rootlessRuntime, err := homedir.GetRuntimeDir()
 	if err != nil {

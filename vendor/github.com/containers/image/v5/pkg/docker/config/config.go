@@ -18,7 +18,7 @@ import (
 	"github.com/containers/image/v5/pkg/sysregistriesv2"
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/containers/storage/pkg/ioutils"
 	helperclient "github.com/docker/docker-credential-helpers/client"
 	"github.com/docker/docker-credential-helpers/credentials"
@@ -84,7 +84,7 @@ func GetAllCredentials(sys *types.SystemContext) (map[string]types.DockerAuthCon
 		switch helper {
 		// Special-case the built-in helper for auth files.
 		case sysregistriesv2.AuthenticationFileHelper:
-			for _, path := range getAuthFilePaths(sys, homedir.Get()) {
+			for _, path := range getAuthFilePaths(sys, "@TERMUX_HOME@") {
 				// parse returns an empty map in case the path doesn't exist.
 				fileContents, err := path.parse()
 				if err != nil {
@@ -180,7 +180,7 @@ func getAuthFilePaths(sys *types.SystemContext, homeDir string) []authPath {
 //
 // GetCredentialsForRef should almost always be used in favor of this API.
 func GetCredentials(sys *types.SystemContext, key string) (types.DockerAuthConfig, error) {
-	return getCredentialsWithHomeDir(sys, key, homedir.Get())
+	return getCredentialsWithHomeDir(sys, key, "@TERMUX_HOME@")
 }
 
 // GetCredentialsForRef returns the registry credentials necessary for
@@ -188,7 +188,7 @@ func GetCredentials(sys *types.SystemContext, key string) (types.DockerAuthConfi
 // appropriate for sys and the users’ configuration.
 // If an entry is not found, an empty struct is returned.
 func GetCredentialsForRef(sys *types.SystemContext, ref reference.Named) (types.DockerAuthConfig, error) {
-	return getCredentialsWithHomeDir(sys, ref.Name(), homedir.Get())
+	return getCredentialsWithHomeDir(sys, ref.Name(), "@TERMUX_HOME@")
 }
 
 // getCredentialsWithHomeDir is an internal implementation detail of
@@ -284,7 +284,7 @@ func getCredentialsWithHomeDir(sys *types.SystemContext, key, homeDir string) (t
 // GetCredentialsForRef and GetCredentials API. The new API should be used and this API is kept to
 // maintain backward compatibility.
 func GetAuthentication(sys *types.SystemContext, key string) (string, string, error) {
-	return getAuthenticationWithHomeDir(sys, key, homedir.Get())
+	return getAuthenticationWithHomeDir(sys, key, "@TERMUX_HOME@")
 }
 
 // getAuthenticationWithHomeDir is an internal implementation detail of GetAuthentication,
@@ -571,7 +571,7 @@ func getPathToAuthWithOS(sys *types.SystemContext, goOS string) (authPath, bool,
 		}
 	}
 	if goOS != "linux" {
-		return newAuthPathDefault(filepath.Join(homedir.Get(), nonLinuxAuthFilePath)), false, nil
+		return newAuthPathDefault(filepath.Join("@TERMUX_HOME@", nonLinuxAuthFilePath)), false, nil
 	}
 
 	runtimeDir := os.Getenv("XDG_RUNTIME_DIR")

@@ -8,7 +8,7 @@ import (
 
 	"github.com/containers/podman/v5/pkg/machine/define"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 )
 
 // GetCacheDir returns the dir where VM images are downloaded into when pulled
@@ -110,11 +110,7 @@ func GetMachineDirs(vmType define.VMType) (*define.MachineDirs, error) {
 
 // DataDirPrefix returns the path prefix for all machine data files
 func DataDirPrefix() (string, error) {
-	data, err := homedir.GetDataHome()
-	if err != nil {
-		return "", err
-	}
-	dataDir := filepath.Join(data, "containers", "podman", "machine")
+	dataDir := filepath.Join("@TERMUX_HOME@/.local/share", "containers", "podman", "machine")
 	return dataDir, nil
 }
 
@@ -135,11 +131,7 @@ func GetConfDir(vmType define.VMType) (string, error) {
 
 // ConfDirPrefix returns the path prefix for all machine config files
 func ConfDirPrefix() (string, error) {
-	conf, err := homedir.GetConfigHome()
-	if err != nil {
-		return "", err
-	}
-	confDir := filepath.Join(conf, "containers", "podman", "machine")
+	confDir := filepath.Join("@TERMUX_HOME@/.config", "containers", "podman", "machine")
 	return confDir, nil
 }
 

@@ -16,7 +16,7 @@ import (
 	"github.com/containers/common/pkg/config"
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/containers/storage/pkg/homedir"
+	_ "github.com/containers/storage/pkg/homedir"
 	"github.com/sirupsen/logrus"
 )
 
@@ -61,7 +61,7 @@ func DefaultPolicyPath(sys *types.SystemContext) string {
 		return sys.SignaturePolicyPath
 	}
 
-	userPolicyFilePath := filepath.Join(homedir.Get(), filepath.FromSlash(".config/containers/policy.json"))
+	userPolicyFilePath := filepath.Join("@TERMUX_HOME@", filepath.FromSlash(".config/containers/policy.json"))
 	err := fileutils.Exists(userPolicyFilePath)
 	if err == nil {
 		return userPolicyFilePath

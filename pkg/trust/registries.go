@@ -8,7 +8,7 @@ import (
 
 	"github.com/containers/image/v5/types"
 	"github.com/containers/storage/pkg/fileutils"
-	"github.com/docker/docker/pkg/homedir"
+	_ "github.com/docker/docker/pkg/homedir"
 	"sigs.k8s.io/yaml"
 )
 
@@ -39,7 +39,7 @@ func RegistriesDirPath(sys *types.SystemContext) string {
 	if sys != nil && sys.RegistriesDirPath != "" {
 		return sys.RegistriesDirPath
 	}
-	userRegistriesDirPath := filepath.Join(homedir.Get(), userRegistriesDir)
+	userRegistriesDirPath := filepath.Join("@TERMUX_HOME@", userRegistriesDir)
 	if err := fileutils.Exists(userRegistriesDirPath); err == nil {
 		return userRegistriesDirPath
 	}
