@@ -183,7 +183,7 @@ func GetVolumePlugin(name string, path string, timeout *uint, cfg *config.Config
 }
 
 func (p *VolumePlugin) getURI() string {
-	return "unix://" + p.SocketPath
+	return "unix://@TERMUX_PREFIX@" + p.SocketPath
 }
 
 // Verify the plugin is still available.
