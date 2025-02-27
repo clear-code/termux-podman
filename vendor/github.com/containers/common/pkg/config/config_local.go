@@ -71,8 +71,8 @@ func (c *ContainersConfig) validateTZ() error {
 	}
 
 	lookupPaths := []string{
-		"/usr/share/zoneinfo",
-		"/etc/zoneinfo",
+		"@TERMUX_PREFIX@/usr/share/zoneinfo",
+		"@TERMUX_PREFIX@/etc/zoneinfo",
 	}
 
 	// Allow using TZDIR to override the lookupPaths. Ref:

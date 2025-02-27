@@ -238,7 +238,7 @@ func runLookupPath(g *generate.Generator, command []string) []string {
 	}
 	// If there is no configured $PATH, supply one.
 	if envPath == "" {
-		defaultPath := "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+		defaultPath := "@TERMUX_PREFIX@/usr/local/bin:@TERMUX_PREFIX@/usr/local/sbin:@TERMUX_PREFIX@/usr/bin:@TERMUX_PREFIX@/usr/sbin:@TERMUX_PREFIX@/bin:@TERMUX_PREFIX@/sbin"
 		envPath = "PATH=" + defaultPath
 		g.AddProcessEnv("PATH", defaultPath)
 	}

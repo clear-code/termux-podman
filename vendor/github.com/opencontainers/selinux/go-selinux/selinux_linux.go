@@ -23,8 +23,8 @@ import (
 
 const (
 	minSensLen       = 2
-	contextFile      = "/usr/share/containers/selinux/contexts"
-	selinuxDir       = "/etc/selinux/"
+	contextFile      = "@TERMUX_PREFIX@/usr/share/containers/selinux/contexts"
+	selinuxDir       = "@TERMUX_PREFIX@/etc/selinux/"
 	selinuxUsersDir  = "contexts/users"
 	defaultContexts  = "contexts/default_contexts"
 	selinuxConfig    = selinuxDir + "config"
@@ -1060,29 +1060,29 @@ func chcon(fpath string, label string, recurse bool) error {
 
 	excludePaths := map[string]bool{
 		"/":           true,
-		"/bin":        true,
+		"@TERMUX_PREFIX@/bin":        true,
 		"/boot":       true,
 		"/dev":        true,
-		"/etc":        true,
-		"/etc/passwd": true,
-		"/etc/pki":    true,
-		"/etc/shadow": true,
-		"/home":       true,
-		"/lib":        true,
-		"/lib64":      true,
-		"/media":      true,
-		"/opt":        true,
+		"@TERMUX_PREFIX@/etc":        true,
+		"@TERMUX_PREFIX@/etc/passwd": true,
+		"@TERMUX_PREFIX@/etc/pki":    true,
+		"@TERMUX_PREFIX@/etc/shadow": true,
+		"@TERMUX_PREFIX@/home":       true,
+		"@TERMUX_PREFIX@/lib":        true,
+		"@TERMUX_PREFIX@/lib64":      true,
+		"@TERMUX_PREFIX@/media":      true,
+		"@TERMUX_PREFIX@/opt":        true,
 		"/proc":       true,
-		"/root":       true,
-		"/run":        true,
-		"/sbin":       true,
-		"/srv":        true,
+		"@TERMUX_PREFIX@/root":       true,
+		"@TERMUX_PREFIX@/run":        true,
+		"@TERMUX_PREFIX@/sbin":       true,
+		"@TERMUX_PREFIX@/srv":        true,
 		"/sys":        true,
-		"/tmp":        true,
-		"/usr":        true,
-		"/var":        true,
-		"/var/lib":    true,
-		"/var/log":    true,
+		"@TERMUX_PREFIX@/tmp":        true,
+		"@TERMUX_PREFIX@/usr":        true,
+		"@TERMUX_PREFIX@/var":        true,
+		"@TERMUX_PREFIX@/var/lib":    true,
+		"@TERMUX_PREFIX@/var/log":    true,
 	}
 
 	if home := os.Getenv("HOME"); home != "" {

@@ -38,7 +38,7 @@ import (
 )
 
 var (
-	CacheDir = "/var/lib/cni"
+	CacheDir = "@TERMUX_PREFIX@/var/lib/cni"
 	// slightly awkward wording to preserve anyone matching on error strings
 	ErrorCheckNotSupp = fmt.Errorf("does not support the CHECK command")
 )

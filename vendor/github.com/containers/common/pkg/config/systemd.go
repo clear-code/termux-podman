@@ -66,7 +66,7 @@ func useJournald() bool {
 		if !useSystemd() {
 			return
 		}
-		for _, root := range []string{"/run/log/journal", "/var/log/journal"} {
+		for _, root := range []string{"@TERMUX_PREFIX@/var/run/log/journal", "@TERMUX_PREFIX@/var/log/journal"} {
 			dirs, err := os.ReadDir(root)
 			if err != nil {
 				continue

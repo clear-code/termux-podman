@@ -84,8 +84,8 @@ func (n *netavarkNetwork) execNetavark(args []string, needPlugin bool, stdin, re
 	// We might break existing users and we cannot expect everyone to change their $PATH so
 	// let's add /usr/sbin to $PATH ourselves.
 	path := os.Getenv("PATH")
-	if !strings.Contains(path, "/usr/sbin") {
-		path += ":/usr/sbin"
+	if !strings.Contains(path, "@TERMUX_PREFIX@/usr/sbin") {
+		path += ":@TERMUX_PREFIX@/usr/sbin"
 		env = append(env, "PATH="+path)
 	}
 	// if we run with debug log level lets also set RUST_BACKTRACE=1 so we can get the full stack trace in case of panics

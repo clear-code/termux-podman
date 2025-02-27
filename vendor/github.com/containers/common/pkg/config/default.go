@@ -23,7 +23,7 @@ import (
 
 const (
 	// _defaultGraphRoot points to the default path of the graph root.
-	_defaultGraphRoot = "/var/lib/containers/storage"
+	_defaultGraphRoot = "@TERMUX_PREFIX@/var/lib/containers/storage"
 
 	// _defaultTransport is a prefix that we apply to an image name to check
 	// docker hub first for the image.
@@ -73,9 +73,9 @@ var (
 	// ErrInvalidArg indicates that an invalid argument was passed.
 	ErrInvalidArg = errors.New("invalid argument")
 	// DefaultHooksDirs defines the default hooks directory.
-	DefaultHooksDirs = []string{"/usr/share/containers/oci/hooks.d"}
+	DefaultHooksDirs = []string{"@TERMUX_PREFIX@/share/containers/oci/hooks.d"}
 	// DefaultCdiSpecDirs defines the default cdi spec directories.
-	DefaultCdiSpecDirs = []string{"/etc/cdi"}
+	DefaultCdiSpecDirs = []string{"@TERMUX_PREFIX@/etc/cdi"}
 	// DefaultCapabilities is the default for the default_capabilities option in the containers.conf file.
 	DefaultCapabilities = []string{
 		"CAP_CHOWN",
@@ -93,17 +93,17 @@ var (
 
 	// Search these locations in which CNIPlugins can be installed.
 	DefaultCNIPluginDirs = []string{
-		"/usr/local/libexec/cni",
-		"/usr/libexec/cni",
-		"/usr/local/lib/cni",
-		"/usr/lib/cni",
+		"@TERMUX_PREFIX@/local/libexec/cni",
+		"@TERMUX_PREFIX@/libexec/cni",
+		"@TERMUX_PREFIX@/local/lib/cni",
+		"@TERMUX_PREFIX@/lib/cni",
 		"/opt/cni/bin",
 	}
 	DefaultNetavarkPluginDirs = []string{
-		"/usr/local/libexec/netavark",
-		"/usr/libexec/netavark",
-		"/usr/local/lib/netavark",
-		"/usr/lib/netavark",
+		"@TERMUX_PREFIX@/local/libexec/netavark",
+		"@TERMUX_PREFIX@/libexec/netavark",
+		"@TERMUX_PREFIX@/local/lib/netavark",
+		"@TERMUX_PREFIX@/lib/netavark",
 	}
 	DefaultSubnetPools = []SubnetPool{
 		// 10.89.0.0/24-10.255.255.0/24
@@ -120,15 +120,15 @@ var (
 
 	defaultUnixComposeProviders = []string{
 		"$HOME/.docker/cli-plugins/docker-compose",
-		"/usr/local/lib/docker/cli-plugins/docker-compose",
-		"/usr/local/libexec/docker/cli-plugins/docker-compose",
-		"/usr/lib/docker/cli-plugins/docker-compose",
-		"/usr/libexec/docker/cli-plugins/docker-compose",
+		"@TERMUX_PREFIX@/local/lib/docker/cli-plugins/docker-compose",
+		"@TERMUX_PREFIX@/local/libexec/docker/cli-plugins/docker-compose",
+		"@TERMUX_PREFIX@/lib/docker/cli-plugins/docker-compose",
+		"@TERMUX_PREFIX@/libexec/docker/cli-plugins/docker-compose",
 		"docker-compose",
 		"podman-compose",
 	}
 
-	defaultContainerEnv = []string{"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"}
+	defaultContainerEnv = []string{"PATH=@TERMUX_PREFIX@/local/sbin:@TERMUX_PREFIX@/local/bin:@TERMUX_PREFIX@/sbin:@TERMUX_PREFIX@/bin:/sbin:/bin"}
 )
 
 // nolint:unparam
@@ -373,75 +373,75 @@ func defaultEngineConfig() (*EngineConfig, error) {
 	c.Retry = 3
 	c.OCIRuntimes = map[string][]string{
 		"crun": {
-			"/usr/bin/crun",
-			"/usr/sbin/crun",
-			"/usr/local/bin/crun",
-			"/usr/local/sbin/crun",
-			"/sbin/crun",
-			"/bin/crun",
-			"/run/current-system/sw/bin/crun",
+			"@TERMUX_PREFIX@/bin/crun",
+			"@TERMUX_PREFIX@/sbin/crun",
+			"@TERMUX_PREFIX@/local/bin/crun",
+			"@TERMUX_PREFIX@/local/sbin/crun",
+			"@TERMUX_PREFIX@/sbin/crun",
+			"@TERMUX_PREFIX@/bin/crun",
+			"@TERMUX_PREFIX@/var/run/current-system/sw/bin/crun",
 		},
 		"crun-vm": {
-			"/usr/bin/crun-vm",
-			"/usr/local/bin/crun-vm",
-			"/usr/local/sbin/crun-vm",
-			"/sbin/crun-vm",
-			"/bin/crun-vm",
-			"/run/current-system/sw/bin/crun-vm",
+			"@TERMUX_PREFIX@/bin/crun-vm",
+			"@TERMUX_PREFIX@/local/bin/crun-vm",
+			"@TERMUX_PREFIX@/local/sbin/crun-vm",
+			"@TERMUX_PREFIX@/sbin/crun-vm",
+			"@TERMUX_PREFIX@/bin/crun-vm",
+			"@TERMUX_PREFIX@/var/run/current-system/sw/bin/crun-vm",
 		},
 		"crun-wasm": {
-			"/usr/bin/crun-wasm",
-			"/usr/sbin/crun-wasm",
-			"/usr/local/bin/crun-wasm",
-			"/usr/local/sbin/crun-wasm",
-			"/sbin/crun-wasm",
-			"/bin/crun-wasm",
-			"/run/current-system/sw/bin/crun-wasm",
+			"@TERMUX_PREFIX@/bin/crun-wasm",
+			"@TERMUX_PREFIX@/sbin/crun-wasm",
+			"@TERMUX_PREFIX@/local/bin/crun-wasm",
+			"@TERMUX_PREFIX@/local/sbin/crun-wasm",
+			"@TERMUX_PREFIX@/sbin/crun-wasm",
+			"@TERMUX_PREFIX@/bin/crun-wasm",
+			"@TERMUX_PREFIX@/var/run/current-system/sw/bin/crun-wasm",
 		},
 		"runc": {
-			"/usr/bin/runc",
-			"/usr/sbin/runc",
-			"/usr/local/bin/runc",
-			"/usr/local/sbin/runc",
-			"/sbin/runc",
-			"/bin/runc",
-			"/usr/lib/cri-o-runc/sbin/runc",
-			"/run/current-system/sw/bin/runc",
+			"@TERMUX_PREFIX@/bin/runc",
+			"@TERMUX_PREFIX@/sbin/runc",
+			"@TERMUX_PREFIX@/local/bin/runc",
+			"@TERMUX_PREFIX@/local/sbin/runc",
+			"@TERMUX_PREFIX@/sbin/runc",
+			"@TERMUX_PREFIX@/bin/runc",
+			"@TERMUX_PREFIX@/lib/cri-o-runc/sbin/runc",
+			"@TERMUX_PREFIX@/var/run/current-system/sw/bin/runc",
 		},
 		"runj": {
-			"/usr/local/bin/runj",
+			"@TERMUX_PREFIX@/local/bin/runj",
 		},
 		"kata": {
-			"/usr/bin/kata-runtime",
-			"/usr/sbin/kata-runtime",
-			"/usr/local/bin/kata-runtime",
-			"/usr/local/sbin/kata-runtime",
-			"/sbin/kata-runtime",
-			"/bin/kata-runtime",
-			"/usr/bin/kata-qemu",
-			"/usr/bin/kata-fc",
+			"@TERMUX_PREFIX@/bin/kata-runtime",
+			"@TERMUX_PREFIX@/sbin/kata-runtime",
+			"@TERMUX_PREFIX@/local/bin/kata-runtime",
+			"@TERMUX_PREFIX@/local/sbin/kata-runtime",
+			"@TERMUX_PREFIX@/sbin/kata-runtime",
+			"@TERMUX_PREFIX@/bin/kata-runtime",
+			"@TERMUX_PREFIX@/bin/kata-qemu",
+			"@TERMUX_PREFIX@/bin/kata-fc",
 		},
 		"runsc": {
-			"/usr/bin/runsc",
-			"/usr/sbin/runsc",
-			"/usr/local/bin/runsc",
-			"/usr/local/sbin/runsc",
-			"/bin/runsc",
-			"/sbin/runsc",
-			"/run/current-system/sw/bin/runsc",
+			"@TERMUX_PREFIX@/bin/runsc",
+			"@TERMUX_PREFIX@/sbin/runsc",
+			"@TERMUX_PREFIX@/local/bin/runsc",
+			"@TERMUX_PREFIX@/local/sbin/runsc",
+			"@TERMUX_PREFIX@/bin/runsc",
+			"@TERMUX_PREFIX@/sbin/runsc",
+			"@TERMUX_PREFIX@/var/run/current-system/sw/bin/runsc",
 		},
 		"youki": {
-			"/usr/local/bin/youki",
-			"/usr/bin/youki",
-			"/bin/youki",
-			"/run/current-system/sw/bin/youki",
+			"@TERMUX_PREFIX@/local/bin/youki",
+			"@TERMUX_PREFIX@/bin/youki",
+			"@TERMUX_PREFIX@/bin/youki",
+			"@TERMUX_PREFIX@/var/run/current-system/sw/bin/youki",
 		},
 		"krun": {
-			"/usr/bin/krun",
-			"/usr/local/bin/krun",
+			"@TERMUX_PREFIX@/bin/krun",
+			"@TERMUX_PREFIX@/local/bin/krun",
 		},
 		"ocijail": {
-			"/usr/local/bin/ocijail",
+			"@TERMUX_PREFIX@/local/bin/ocijail",
 		},
 	}
 	c.PlatformToOCIRuntime = map[string]string{
@@ -452,26 +452,26 @@ func defaultEngineConfig() (*EngineConfig, error) {
 	// Needs to be called after populating c.OCIRuntimes.
 	c.OCIRuntime = c.findRuntime()
 
-	c.ConmonEnvVars.Set([]string{"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"})
+	c.ConmonEnvVars.Set([]string{"PATH=@TERMUX_PREFIX@/local/sbin:@TERMUX_PREFIX@/local/bin:@TERMUX_PREFIX@/sbin:@TERMUX_PREFIX@/bin:/sbin:/bin"})
 	c.ConmonPath.Set([]string{
-		"/usr/libexec/podman/conmon",
-		"/usr/local/libexec/podman/conmon",
-		"/usr/local/lib/podman/conmon",
-		"/usr/bin/conmon",
-		"/usr/sbin/conmon",
-		"/usr/local/bin/conmon",
-		"/usr/local/sbin/conmon",
-		"/run/current-system/sw/bin/conmon",
+		"@TERMUX_PREFIX@/libexec/podman/conmon",
+		"@TERMUX_PREFIX@/local/libexec/podman/conmon",
+		"@TERMUX_PREFIX@/local/lib/podman/conmon",
+		"@TERMUX_PREFIX@/bin/conmon",
+		"@TERMUX_PREFIX@/sbin/conmon",
+		"@TERMUX_PREFIX@/local/bin/conmon",
+		"@TERMUX_PREFIX@/local/sbin/conmon",
+		"@TERMUX_PREFIX@/var/run/current-system/sw/bin/conmon",
 	})
 	c.ConmonRsPath.Set([]string{
-		"/usr/libexec/podman/conmonrs",
-		"/usr/local/libexec/podman/conmonrs",
-		"/usr/local/lib/podman/conmonrs",
-		"/usr/bin/conmonrs",
-		"/usr/sbin/conmonrs",
-		"/usr/local/bin/conmonrs",
-		"/usr/local/sbin/conmonrs",
-		"/run/current-system/sw/bin/conmonrs",
+		"@TERMUX_PREFIX@/libexec/podman/conmonrs",
+		"@TERMUX_PREFIX@/local/libexec/podman/conmonrs",
+		"@TERMUX_PREFIX@/local/lib/podman/conmonrs",
+		"@TERMUX_PREFIX@/bin/conmonrs",
+		"@TERMUX_PREFIX@/sbin/conmonrs",
+		"@TERMUX_PREFIX@/local/bin/conmonrs",
+		"@TERMUX_PREFIX@/local/sbin/conmonrs",
+		"@TERMUX_PREFIX@/var/run/current-system/sw/bin/conmonrs",
 	})
 	c.PullPolicy = DefaultPullPolicy
 	c.RuntimeSupportsJSON.Set([]string{

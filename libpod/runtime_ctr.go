@@ -428,13 +428,13 @@ func (r *Runtime) setupContainer(ctx context.Context, ctr *Container) (_ *Contai
 		g := generate.NewFromSpec(ctr.config.Spec)
 		g.RemoveMount("/dev/shm")
 		ctr.config.ShmDir = ""
-		g.RemoveMount("/etc/resolv.conf")
-		g.RemoveMount("/etc/hostname")
-		g.RemoveMount("/etc/hosts")
-		g.RemoveMount("/run/.containerenv")
-		g.RemoveMount("/run/secrets")
-		g.RemoveMount("/var/run/.containerenv")
-		g.RemoveMount("/var/run/secrets")
+		g.RemoveMount("@TERMUX_PREFIX@/etc/resolv.conf")
+		g.RemoveMount("@TERMUX_PREFIX@/etc/hostname")
+		g.RemoveMount("@TERMUX_PREFIX@/etc/hosts")
+		g.RemoveMount("@TERMUX_PREFIX@/run/.containerenv")
+		g.RemoveMount("@TERMUX_PREFIX@/run/secrets")
+		g.RemoveMount("@TERMUX_PREFIX@/var/run/.containerenv")
+		g.RemoveMount("@TERMUX_PREFIX@/var/run/secrets")
 
 		// Regenerate Cgroup paths so they don't point to the old
 		// container ID.

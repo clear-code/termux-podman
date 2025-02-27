@@ -20,10 +20,10 @@ const Version = current.Version
 
 const (
 	// DefaultDir is the default directory containing system hook configuration files.
-	DefaultDir = "/usr/share/containers/oci/hooks.d"
+	DefaultDir = "@TERMUX_PREFIX@/usr/share/containers/oci/hooks.d"
 
 	// OverrideDir is the directory for hook configuration files overriding the default entries.
-	OverrideDir = "/etc/containers/oci/hooks.d"
+	OverrideDir = "@TERMUX_PREFIX@/etc/containers/oci/hooks.d"
 )
 
 // Manager provides an opaque interface for managing CRI-O hooks.

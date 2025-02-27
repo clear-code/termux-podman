@@ -141,11 +141,11 @@ func currentUserSubIDs(fileName string) ([]SubID, error) {
 }
 
 func CurrentUserSubUIDs() ([]SubID, error) {
-	return currentUserSubIDs("/etc/subuid")
+	return currentUserSubIDs("@TERMUX_PREFIX@/etc/subuid")
 }
 
 func CurrentUserSubGIDs() ([]SubID, error) {
-	return currentUserSubIDs("/etc/subgid")
+	return currentUserSubIDs("@TERMUX_PREFIX@/etc/subgid")
 }
 
 func CurrentProcessUIDMap() ([]IDMap, error) {

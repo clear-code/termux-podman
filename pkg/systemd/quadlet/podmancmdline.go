@@ -9,7 +9,7 @@ import (
 
 // Overwritten at build time
 var (
-	_binDir = "/usr/bin"
+	_binDir = "@TERMUX_PREFIX@/usr/bin"
 )
 
 func podmanBinary() string {

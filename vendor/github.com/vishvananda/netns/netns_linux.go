@@ -165,7 +165,7 @@ func findCgroupMountpoint(cgroupType string) (int, string, error) {
 // borrowed from docker/utils/utils.go
 // modified to get the docker pid instead of using /proc/self
 func getDockerCgroup(cgroupVer int, cgroupType string) (string, error) {
-	dockerpid, err := os.ReadFile("/var/run/docker.pid")
+	dockerpid, err := os.ReadFile("@TERMUX_PREFIX@/var/run/docker.pid")
 	if err != nil {
 		return "", err
 	}

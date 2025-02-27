@@ -158,7 +158,7 @@ var defaults = map[string]string{
 	strings.ToLower("UserKnownHostsFile"): "~/.ssh/known_hosts ~/.ssh/known_hosts2",
 	strings.ToLower("VerifyHostKeyDNS"):   "no",
 	strings.ToLower("VisualHostKey"):      "no",
-	strings.ToLower("XAuthLocation"):      "/usr/X11R6/bin/xauth",
+	strings.ToLower("XAuthLocation"):      "@TERMUX_PREFIX@/usr/X11R6/bin/xauth",
 }
 
 // these identities are used for SSH protocol 2

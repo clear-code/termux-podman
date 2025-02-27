@@ -168,7 +168,7 @@ func (ign *DynamicIgnition) GenerateIgnitionConfig() error {
 				// We always want this value in unix form (/path/to/something) because this is being
 				// set in the machine OS (always Linux).  However, filepath.join on windows will use a "\\"
 				// separator; therefore we use ToSlash to convert the path to unix style
-				Target: filepath.ToSlash(filepath.Join("/usr/share/zoneinfo", tz)),
+				Target: filepath.ToSlash(filepath.Join("@TERMUX_PREFIX@/usr/share/zoneinfo", tz)),
 			},
 		}
 		ignStorage.Links = append(ignStorage.Links, tzLink)
@@ -188,25 +188,25 @@ func (ign *DynamicIgnition) GenerateIgnitionConfig() error {
 	envset.Add("Service", "Type", "oneshot")
 	envset.Add("Service", "RemainAfterExit", "yes")
 	envset.Add("Service", "Environment", "FWCFGRAW=/sys/firmware/qemu_fw_cfg/by_name/opt/com.coreos/environment/raw")
-	envset.Add("Service", "Environment", "SYSTEMD_CONF=/etc/systemd/system.conf.d/default-env.conf")
-	envset.Add("Service", "Environment", "ENVD_CONF=/etc/environment.d/default-env.conf")
-	envset.Add("Service", "Environment", "PROFILE_CONF=/etc/profile.d/default-env.sh")
-	envset.Add("Service", "ExecStart", `/usr/bin/bash -c '/usr/bin/test -f ${FWCFGRAW} &&\
-        echo "[Manager]\n#Got from QEMU FW_CFG\nDefaultEnvironment=$(/usr/bin/base64 -d ${FWCFGRAW} | sed -e "s+|+ +g")\n" > ${SYSTEMD_CONF} ||\
+	envset.Add("Service", "Environment", "SYSTEMD_CONF=@TERMUX_PREFIX@/etc/systemd/system.conf.d/default-env.conf")
+	envset.Add("Service", "Environment", "ENVD_CONF=@TERMUX_PREFIX@/etc/environment.d/default-env.conf")
+	envset.Add("Service", "Environment", "PROFILE_CONF=@TERMUX_PREFIX@/etc/profile.d/default-env.sh")
+	envset.Add("Service", "ExecStart", `@TERMUX_PREFIX@/usr/bin/bash -c '@TERMUX_PREFIX@/usr/bin/test -f ${FWCFGRAW} &&\
+        echo "[Manager]\n#Got from QEMU FW_CFG\nDefaultEnvironment=$(@TERMUX_PREFIX@/usr/bin/base64 -d ${FWCFGRAW} | sed -e "s+|+ +g")\n" > ${SYSTEMD_CONF} ||\
         echo "[Manager]\n#Got nothing from QEMU FW_CFG\n#DefaultEnvironment=\n" > ${SYSTEMD_CONF}'`)
-	envset.Add("Service", "ExecStart", `/usr/bin/bash -c '/usr/bin/test -f ${FWCFGRAW} && (\
+	envset.Add("Service", "ExecStart", `@TERMUX_PREFIX@/usr/bin/bash -c '@TERMUX_PREFIX@/usr/bin/test -f ${FWCFGRAW} && (\
         echo "#Got from QEMU FW_CFG"> ${ENVD_CONF};\
         IFS="|";\
-        for iprxy in $(/usr/bin/base64 -d ${FWCFGRAW}); do\
+        for iprxy in $(@TERMUX_PREFIX@/usr/bin/base64 -d ${FWCFGRAW}); do\
             echo "$iprxy" >> ${ENVD_CONF}; done ) || \
         echo "#Got nothing from QEMU FW_CFG"> ${ENVD_CONF}'`)
-	envset.Add("Service", "ExecStart", `/usr/bin/bash -c '/usr/bin/test -f ${FWCFGRAW} && (\
+	envset.Add("Service", "ExecStart", `@TERMUX_PREFIX@/usr/bin/bash -c '@TERMUX_PREFIX@/usr/bin/test -f ${FWCFGRAW} && (\
         echo "#Got from QEMU FW_CFG"> ${PROFILE_CONF};\
         IFS="|";\
-        for iprxy in $(/usr/bin/base64 -d ${FWCFGRAW}); do\
+        for iprxy in $(@TERMUX_PREFIX@/usr/bin/base64 -d ${FWCFGRAW}); do\
             echo "export $iprxy" >> ${PROFILE_CONF}; done ) || \
         echo "#Got nothing from QEMU FW_CFG"> ${PROFILE_CONF}'`)
-	envset.Add("Service", "ExecStartPost", "/usr/bin/systemctl daemon-reload")
+	envset.Add("Service", "ExecStartPost", "@TERMUX_PREFIX@/usr/bin/systemctl daemon-reload")
 
 	envset.Add("Install", "WantedBy", "sysinit.target")
 	envsetFile, err := envset.ToString()
@@ -300,7 +300,7 @@ func getFiles(usrName string, uid int, rootful bool, vmtype define.VMType, _ boo
 	lingerExample.Add("Unit", "Description", "A systemd user unit demo")
 	lingerExample.Add("Unit", "After", "network-online.target")
 	lingerExample.Add("Unit", "Wants", "network-online.target podman.socket")
-	lingerExample.Add("Service", "ExecStart", "/usr/bin/sleep infinity")
+	lingerExample.Add("Service", "ExecStart", "@TERMUX_PREFIX@/usr/bin/sleep infinity")
 	lingerExampleFile, err := lingerExample.ToString()
 	if err != nil {
 		logrus.Warn(err.Error())
@@ -358,7 +358,7 @@ pids_limit=0
 	})
 
 	// Set up /etc/subuid and /etc/subgid
-	for _, sub := range []string{"/etc/subuid", "/etc/subgid"} {
+	for _, sub := range []string{"@TERMUX_PREFIX@/etc/subuid", "/etc/subgid"} {
 		files = append(files, File{
 			Node: Node{
 				Group:     GetNodeGrp("root"),
@@ -381,7 +381,7 @@ pids_limit=0
 	files = append(files, File{
 		Node: Node{
 			Group: GetNodeGrp("root"),
-			Path:  "/etc/containers/podman-machine",
+			Path:  "@TERMUX_PREFIX@/etc/containers/podman-machine",
 			User:  GetNodeUsr("root"),
 		},
 		FileEmbedded1: FileEmbedded1{
@@ -580,13 +580,13 @@ func getLinks(usrName string) []Link {
 	}, {
 		Node: Node{
 			Group:     GetNodeGrp("root"),
-			Path:      "/usr/local/bin/docker",
+			Path:      "@TERMUX_PREFIX@/usr/local/bin/docker",
 			Overwrite: BoolToPtr(true),
 			User:      GetNodeUsr("root"),
 		},
 		LinkEmbedded1: LinkEmbedded1{
 			Hard:   BoolToPtr(false),
-			Target: "/usr/bin/podman",
+			Target: "@TERMUX_PREFIX@/usr/bin/podman",
 		},
 	}}
 }
@@ -599,14 +599,14 @@ func GetPodmanDockerTmpConfig(uid int, rootful bool, newline bool) string {
 	// Derived from https://github.com/containers/podman/blob/main/contrib/systemd/system/podman-docker.conf
 	podmanSock := "/run/podman/podman.sock"
 	if !rootful {
-		podmanSock = fmt.Sprintf("/run/user/%d/podman/podman.sock", uid)
+		podmanSock = fmt.Sprintf("@TERMUX_PREFIX@/run/user/%d/podman/podman.sock", uid)
 	}
 	suffix := ""
 	if newline {
 		suffix = "\n"
 	}
 
-	return fmt.Sprintf("L+  /run/docker.sock   -    -    -     -   %s%s", podmanSock, suffix)
+	return fmt.Sprintf("L+  @TERMUX_PREFIX@/run/docker.sock   -    -    -     -   %s%s", podmanSock, suffix)
 }
 
 // SetIgnitionFile creates a new Machine File for the machine's ignition file
@@ -734,7 +734,7 @@ func GetNetRecoveryUnitFile() *parser.UnitFile {
 	recoveryUnit := parser.NewUnitFile()
 	recoveryUnit.Add("Unit", "Description", "Verifies health of network and recovers if necessary")
 	recoveryUnit.Add("Unit", "After", "sshd.socket sshd.service")
-	recoveryUnit.Add("Service", "ExecStart", "/usr/local/bin/net-health-recovery.sh")
+	recoveryUnit.Add("Service", "ExecStart", "@TERMUX_PREFIX@/usr/local/bin/net-health-recovery.sh")
 	recoveryUnit.Add("Service", "StandardOutput", "journal")
 	recoveryUnit.Add("Service", "StandardError", "journal")
 	recoveryUnit.Add("Service", "StandardInput", "null")

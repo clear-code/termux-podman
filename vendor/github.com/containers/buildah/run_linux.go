@@ -241,7 +241,7 @@ func (b *Builder) Run(command []string, options RunOptions) error {
 	}
 
 	// hardwire the environment to match docker build to avoid subtle and hard-to-debug differences due to containers.conf
-	b.configureEnvironment(g, options, []string{"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"})
+	b.configureEnvironment(g, options, []string{"PATH=@TERMUX_PREFIX@/usr/local/sbin:@TERMUX_PREFIX@/usr/local/bin:@TERMUX_PREFIX@/usr/sbin:@TERMUX_PREFIX@/usr/bin:@TERMUX_PREFIX@/sbin:@TERMUX_PREFIX@/bin"})
 
 	if b.CommonBuildOpts == nil {
 		return fmt.Errorf("invalid format on container you must recreate the container")

@@ -96,16 +96,16 @@ type Pkcs11Config struct {
 // a variety of Linux distros
 func GetDefaultModuleDirectories() []string {
 	dirs := []string{
-		"/usr/lib64/pkcs11/", // Fedora,RHEL,openSUSE
-		"/usr/lib/pkcs11/",   // Fedora,ArchLinux
-		"/usr/local/lib/pkcs11/",
-		"/usr/lib/softhsm/", // Debian,Ubuntu
+		"@TERMUX_PREFIX@/usr/lib64/pkcs11/", // Fedora,RHEL,openSUSE
+		"@TERMUX_PREFIX@/usr/lib/pkcs11/",   // Fedora,ArchLinux
+		"@TERMUX_PREFIX@/usr/local/lib/pkcs11/",
+		"@TERMUX_PREFIX@/usr/lib/softhsm/", // Debian,Ubuntu
 	}
 
 	// Debian directory: /usr/lib/(x86_64|aarch64|arm|powerpc64le|riscv64|s390x)-linux-gnu/
 	hosttype, ostype, q := getHostAndOsType()
 	if len(hosttype) > 0 {
-		dir := fmt.Sprintf("/usr/lib/%s-%s-%s/", hosttype, ostype, q)
+		dir := fmt.Sprintf("@TERMUX_PREFIX@/usr/lib/%s-%s-%s/", hosttype, ostype, q)
 		dirs = append(dirs, dir)
 	}
 	return dirs

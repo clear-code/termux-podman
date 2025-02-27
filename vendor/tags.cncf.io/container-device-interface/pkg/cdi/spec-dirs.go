@@ -25,9 +25,9 @@ import (
 
 const (
 	// DefaultStaticDir is the default directory for static CDI Specs.
-	DefaultStaticDir = "/etc/cdi"
+	DefaultStaticDir = "@TERMUX_PREFIX@/etc/cdi"
 	// DefaultDynamicDir is the default directory for generated CDI Specs
-	DefaultDynamicDir = "/var/run/cdi"
+	DefaultDynamicDir = "@TERMUX_PREFIX@/var/run/cdi"
 )
 
 var (

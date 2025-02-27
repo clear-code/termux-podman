@@ -86,8 +86,8 @@ func (e *cniExec) ExecPlugin(ctx context.Context, pluginPath string, stdinData [
 	// We might break existing users and we cannot expect everyone to change their $PATH so
 	// let's add /usr/sbin to $PATH ourselves.
 	path := os.Getenv("PATH")
-	if !strings.Contains(path, "/usr/sbin") {
-		path += ":/usr/sbin"
+	if !strings.Contains(path, "@TERMUX_PREFIX@/usr/sbin") {
+		path += ":@TERMUX_PREFIX@/usr/sbin"
 		c.Env = append(c.Env, "PATH="+path)
 	}
 

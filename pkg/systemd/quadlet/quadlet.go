@@ -21,11 +21,11 @@ const (
 	// but it is causing bloat
 	autoUpdateLabel = "io.containers.autoupdate"
 	// Directory for temporary Quadlet files (sysadmin owned)
-	UnitDirTemp = "/run/containers/systemd"
+	UnitDirTemp = "@TERMUX_PREFIX@/var/run/containers/systemd"
 	// Directory for global Quadlet files (sysadmin owned)
-	UnitDirAdmin = "/etc/containers/systemd"
+	UnitDirAdmin = "@TERMUX_PREFIX@/etc/containers/systemd"
 	// Directory for global Quadlet files (distro owned)
-	UnitDirDistro = "/usr/share/containers/systemd"
+	UnitDirDistro = "@TERMUX_PREFIX@/usr/share/containers/systemd"
 
 	// Names of commonly used systemd/quadlet group names
 	ContainerGroup  = "Container"

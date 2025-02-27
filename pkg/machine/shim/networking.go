@@ -20,8 +20,8 @@ import (
 )
 
 const (
-	dockerSock           = "/var/run/docker.sock"
-	defaultGuestSock     = "/run/user/%d/podman/podman.sock"
+	dockerSock           = "@TERMUX_PREFIX@/var/run/docker.sock"
+	defaultGuestSock     = "@TERMUX_PREFIX@/var/run/user/%d/podman/podman.sock"
 	dockerConnectTimeout = 5 * time.Second
 )
 
@@ -37,7 +37,7 @@ func startHostForwarder(mc *vmconfigs.MachineConfig, provider vmconfigs.VMProvid
 	// the guestSock is "inside" the guest machine
 	guestSock := fmt.Sprintf(defaultGuestSock, mc.HostUser.UID)
 	if mc.HostUser.Rootful {
-		guestSock = "/run/podman/podman.sock"
+		guestSock = "@TERMUX_PREFIX@/var/run/podman/podman.sock"
 		forwardUser = "root"
 	}
 

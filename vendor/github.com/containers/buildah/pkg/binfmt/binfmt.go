@@ -33,7 +33,7 @@ func MaybeRegister(configurationSearchDirectories []string) error {
 // in the current mount namespace first, ignoring only EPERM and EACCES errors.
 func Register(configurationSearchDirectories []string) error {
 	if len(configurationSearchDirectories) == 0 {
-		configurationSearchDirectories = []string{"/etc/binfmt.d", "/run/binfmt.d", "/usr/lib/binfmt.d"}
+		configurationSearchDirectories = []string{"@TERMUX_PREFIX@/etc/binfmt.d", "@TERMUX_PREFIX@/var/run/binfmt.d", "@TERMUX_PREFIX@/usr/lib/binfmt.d"}
 	}
 	mounted := false
 	for _, searchDir := range configurationSearchDirectories {

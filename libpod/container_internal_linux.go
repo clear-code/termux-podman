@@ -252,7 +252,7 @@ func (c *Container) setupSystemd(mounts []spec.Mount, g generate.Generator) erro
 		}
 		g.AddMount(tmpfsMnt)
 	}
-	for _, dest := range []string{"/tmp", "/var/log/journal"} {
+	for _, dest := range []string{"@TERMUX_PREFIX@/tmp", "@TERMUX_PREFIX@/var/log/journal"} {
 		if MountExists(mounts, dest) {
 			continue
 		}

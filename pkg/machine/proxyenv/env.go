@@ -13,13 +13,13 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const proxySetupScriptTemplate = `#!/bin/bash
+const proxySetupScriptTemplate = `#!@TERMUX_PREFIX@/bin/bash
 
-SYSTEMD_CONF=/etc/systemd/system.conf.d/default-env.conf
-ENVD_CONF=/etc/environment.d/default-env.conf
-PROFILE_CONF=/etc/profile.d/default-env.sh
+SYSTEMD_CONF=@TERMUX_PREFIX@/etc/systemd/system.conf.d/default-env.conf
+ENVD_CONF=@TERMUX_PREFIX@/etc/environment.d/default-env.conf
+PROFILE_CONF=@TERMUX_PREFIX@/etc/profile.d/default-env.sh
 
-mkdir -p /etc/profile.d /etc/environment.d /etc/systemd/system.conf.d/
+mkdir -p @TERMUX_PREFIX@/etc/profile.d @TERMUX_PREFIX@/etc/environment.d @TERMUX_PREFIX@/etc/systemd/system.conf.d/
 rm -f $SYSTEMD_CONF $ENVD_CONF $PROFILE_CONF
 
 echo "[Manager]" >> $SYSTEMD_CONF
@@ -52,6 +52,6 @@ func getProxyScript(isWSL bool) io.Reader {
 }
 
 func ApplyProxies(mc *vmconfigs.MachineConfig) error {
-	return machine.CommonSSHWithStdin("root", mc.SSH.IdentityPath, mc.Name, mc.SSH.Port, []string{"/usr/bin/bash"},
+	return machine.CommonSSHWithStdin("root", mc.SSH.IdentityPath, mc.Name, mc.SSH.Port, []string{"@TERMUX_PREFIX@/usr/bin/bash"},
 		getProxyScript(mc.WSLHypervisor != nil))
 }

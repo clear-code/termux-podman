@@ -20,10 +20,10 @@ import (
 var (
 	// DefaultMountsFile holds the default mount paths in the form
 	// "host_path:container_path"
-	DefaultMountsFile = "/usr/share/containers/mounts.conf"
+	DefaultMountsFile = "@TERMUX_PREFIX@/usr/share/containers/mounts.conf"
 	// OverrideMountsFile holds the default mount paths in the form
 	// "host_path:container_path" overridden by the user
-	OverrideMountsFile = "/etc/containers/mounts.conf"
+	OverrideMountsFile = "@TERMUX_PREFIX@/etc/containers/mounts.conf"
 	// UserOverrideMountsFile holds the default mount paths in the form
 	// "host_path:container_path" overridden by the rootless user
 	UserOverrideMountsFile = filepath.Join(os.Getenv("HOME"), ".config/containers/mounts.conf")
@@ -412,8 +412,8 @@ func addFIPSMounts(mounts *[]rspec.Mount, containerRunDir, mountPoint, mountLabe
 		}
 	}
 
-	srcBackendDir := "/usr/share/crypto-policies/back-ends/FIPS"
-	destDir := "/etc/crypto-policies/back-ends"
+	srcBackendDir := "@TERMUX_PREFIX@/usr/share/crypto-policies/back-ends/FIPS"
+	destDir := "@TERMUX_PREFIX@/etc/crypto-policies/back-ends"
 	srcOnHost, err := securejoin.SecureJoin(mountPoint, srcBackendDir)
 	if err != nil {
 		return fmt.Errorf("resolve %s in the container: %w", srcBackendDir, err)
@@ -444,8 +444,8 @@ func addFIPSMounts(mounts *[]rspec.Mount, containerRunDir, mountPoint, mountLabe
 	//   /etc/crypto-policies/back-ends -> /usr/share/crypto-policies/back-ends/FIPS
 	//   /etc/crypto-policies/config -> /usr/share/crypto-policies/default-fips-config
 	// if they both exist.
-	srcPolicyConfig := "/usr/share/crypto-policies/default-fips-config"
-	destPolicyConfig := "/etc/crypto-policies/config"
+	srcPolicyConfig := "@TERMUX_PREFIX@/usr/share/crypto-policies/default-fips-config"
+	destPolicyConfig := "@TERMUX_PREFIX@/etc/crypto-policies/config"
 	srcPolicyConfigOnHost, err := securejoin.SecureJoin(mountPoint, srcPolicyConfig)
 	if err != nil {
 		return fmt.Errorf("Could not expand %q in container: %w", srcPolicyConfig, err)

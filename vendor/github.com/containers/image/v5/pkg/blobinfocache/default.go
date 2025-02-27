@@ -17,7 +17,7 @@ const (
 	// If the format changes in an incompatible way, increase the version number.
 	blobInfoCacheFilename = "blob-info-cache-v1.sqlite"
 	// systemBlobInfoCacheDir is the directory containing the blob info cache (in blobInfocacheFilename) for root-running processes.
-	systemBlobInfoCacheDir = "/var/lib/containers/cache"
+	systemBlobInfoCacheDir = "@TERMUX_PREFIX@/var/lib/containers/cache"
 )
 
 // blobInfoCacheDir returns a path to a blob info cache appropriate for sys and euid.

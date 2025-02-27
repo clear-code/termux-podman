@@ -7,7 +7,7 @@ import (
 
 const (
 	// defaultSocket specifies the default path to the libvirt unix socket.
-	defaultSocket = "/var/run/libvirt/libvirt-sock"
+	defaultSocket = "@TERMUX_PREFIX@/var/run/libvirt/libvirt-sock"
 
 	// defaultLocalTimeout specifies the default libvirt dial timeout.
 	defaultLocalTimeout = 15 * time.Second

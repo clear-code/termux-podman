@@ -16,8 +16,8 @@ const moduleSubdir = "containers/containers.conf.modules"
 // Moving the base paths into variables allows for overriding them in units
 // tests.
 var (
-	moduleBaseEtc = "/etc/"
-	moduleBaseUsr = "/usr/share"
+	moduleBaseEtc = "@TERMUX_PREFIX@/etc/"
+	moduleBaseUsr = "@TERMUX_PREFIX@/usr/share"
 )
 
 // LoadedModules returns absolute paths to loaded containers.conf modules.

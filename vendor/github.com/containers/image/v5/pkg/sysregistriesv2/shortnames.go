@@ -34,7 +34,7 @@ func shortNameAliasesConfPath(ctx *types.SystemContext) (string, error) {
 
 	if rootless.GetRootlessEUID() == 0 {
 		// Root user or in a non-conforming user NS
-		return filepath.Join("/var/cache", userShortNamesFile), nil
+		return filepath.Join("@TERMUX_PREFIX@/var/cache", userShortNamesFile), nil
 	}
 
 	// Rootless user

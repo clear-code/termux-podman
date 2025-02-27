@@ -29,8 +29,8 @@ func (e ranges) Swap(i, j int)      { e[i], e[j] = e[j], e[i] }
 func (e ranges) Less(i, j int) bool { return e[i].Start < e[j].Start }
 
 const (
-	subuidFileName = "/etc/subuid"
-	subgidFileName = "/etc/subgid"
+	subuidFileName = "@TERMUX_PREFIX@/etc/subuid"
+	subgidFileName = "@TERMUX_PREFIX@/etc/subgid"
 )
 
 // MkdirAllAndChown creates a directory (include any along the path) and then modifies

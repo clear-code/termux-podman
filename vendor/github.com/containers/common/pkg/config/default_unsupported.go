@@ -20,5 +20,5 @@ func getDefaultTmpDir() string {
 	if path, found := os.LookupEnv("TMPDIR"); found {
 		return path
 	}
-	return "/var/tmp"
+	return "@TERMUX_PREFIX@/var/tmp"
 }

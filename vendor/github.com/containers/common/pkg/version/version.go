@@ -26,7 +26,7 @@ func queryPackageVersion(cmdArg ...string) string {
 		if outp, err := cmd.Output(); err == nil {
 			output = string(outp)
 			switch cmdArg[0] {
-			case "/usr/bin/dlocate":
+			case "@TERMUX_PREFIX@/usr/bin/dlocate":
 				// can return multiple matches
 				l := strings.Split(output, "\n")
 				output = l[0]
@@ -45,20 +45,20 @@ func queryPackageVersion(cmdArg ...string) string {
 						}
 					}
 				}
-			case "/usr/bin/dpkg":
+			case "@TERMUX_PREFIX@/usr/bin/dpkg":
 				r := strings.Split(output, ": ")
 				queryFormat := `${Package}_${Version}_${Architecture}`
-				cmd = exec.Command("/usr/bin/dpkg-query", "-f", queryFormat, "-W", r[0])
+				cmd = exec.Command("@TERMUX_PREFIX@/usr/bin/dpkg-query", "-f", queryFormat, "-W", r[0])
 				if outp, err := cmd.Output(); err == nil {
 					output = string(outp)
 				}
-			case "/usr/bin/pacman":
+			case "@TERMUX_PREFIX@/usr/bin/pacman":
 				pkg := strings.Trim(output, "\n")
 				cmd = exec.Command(cmdArg[0], "-Q", "--", pkg)
 				if outp, err := cmd.Output(); err == nil {
 					output = strings.ReplaceAll(string(outp), " ", "-")
 				}
-			case "/sbin/apk":
+			case "@TERMUX_PREFIX@/sbin/apk":
 				prefix := cmdArg[len(cmdArg)-1] + " is owned by "
 				output = strings.Replace(output, prefix, "", 1)
 			}
@@ -80,14 +80,14 @@ func Package(program string) string { // program is full path
 		Command []string
 	}
 	packagers := []Packager{
-		{"rpm", []string{"/usr/bin/rpm", "-q", "-f"}},
-		{"deb", []string{"/usr/bin/dlocate", "-F"}},             // Debian, Ubuntu (quick)
-		{"deb", []string{"/usr/bin/dpkg", "-S"}},                // Debian, Ubuntu (slow)
-		{"pacman", []string{"/usr/bin/pacman", "-Qoq"}},         // Arch
-		{"gentoo", []string{"/usr/bin/qfile", "-qv"}},           // Gentoo (quick)
-		{"gentoo", []string{"/usr/bin/equery", "b"}},            // Gentoo (slow)
-		{"apk", []string{"/sbin/apk", "info", "-W"}},            // Alpine
-		{"pkg", []string{"/usr/local/sbin/pkg", "which", "-q"}}, // FreeBSD
+		{"rpm", []string{"@TERMUX_PREFIX@/usr/bin/rpm", "-q", "-f"}},
+		{"deb", []string{"@TERMUX_PREFIX@/usr/bin/dlocate", "-F"}},             // Debian, Ubuntu (quick)
+		{"deb", []string{"@TERMUX_PREFIX@/usr/bin/dpkg", "-S"}},                // Debian, Ubuntu (slow)
+		{"pacman", []string{"@TERMUX_PREFIX@/usr/bin/pacman", "-Qoq"}},         // Arch
+		{"gentoo", []string{"@TERMUX_PREFIX@/usr/bin/qfile", "-qv"}},           // Gentoo (quick)
+		{"gentoo", []string{"@TERMUX_PREFIX@/usr/bin/equery", "b"}},            // Gentoo (slow)
+		{"apk", []string{"@TERMUX_PREFIX@/sbin/apk", "info", "-W"}},            // Alpine
+		{"pkg", []string{"@TERMUX_PREFIX@/usr/local/sbin/pkg", "which", "-q"}}, // FreeBSD
 	}
 
 	lastformat := ""

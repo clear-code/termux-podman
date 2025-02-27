@@ -42,7 +42,7 @@ const (
 	rootlessNetNsConnPidFile = "rootless-netns-conn.pid"
 
 	// persistentCNIDir is the directory where the CNI files are stored
-	persistentCNIDir = "/var/lib/cni"
+	persistentCNIDir = "@TERMUX_PREFIX@/var/lib/cni"
 
 	tmpfs          = "tmpfs"
 	none           = "none"
