@@ -153,7 +153,7 @@ func GetRuntimeDir() (string, error) {
 
 		uid := strconv.Itoa(unshare.GetRootlessUID())
 		if runtimeDir == "" {
-			tmpDir := filepath.Join("/run", "user", uid)
+			tmpDir := filepath.Join("@TERMUX_PREFIX@/run", "user", uid)
 			if err := os.MkdirAll(tmpDir, 0o700); err != nil {
 				logrus.Debug(err)
 			}
