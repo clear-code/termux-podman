@@ -185,12 +185,12 @@ func GenerateMeasurement(workloadConfig WorkloadConfig, firmwareLibrary string) 
 	}
 
 	sharedLibraryDirs := []string{
-		"/usr/local/lib64",
-		"/usr/local/lib",
-		"/lib64",
-		"/lib",
-		"/usr/lib64",
-		"/usr/lib",
+		"@TERMUX_PREFIX@/usr/local/lib64",
+		"@TERMUX_PREFIX@/usr/local/lib",
+		"@TERMUX_PREFIX@/lib64",
+		"@TERMUX_PREFIX@/lib",
+		"@TERMUX_PREFIX@/usr/lib64",
+		"@TERMUX_PREFIX@/usr/lib",
 	}
 	if llp, ok := os.LookupEnv("LD_LIBRARY_PATH"); ok {
 		sharedLibraryDirs = append(sharedLibraryDirs, strings.Split(llp, ":")...)

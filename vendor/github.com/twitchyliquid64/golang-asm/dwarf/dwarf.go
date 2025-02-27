@@ -1627,7 +1627,7 @@ func IsDWARFEnabledOnAIXLd(extld string) (bool, error) {
 	// gcc -Wl,-V output should be:
 	//   /usr/bin/ld: LD X.X.X(date)
 	//   ...
-	out = bytes.TrimPrefix(out, []byte("/usr/bin/ld: LD "))
+	out = bytes.TrimPrefix(out, []byte("@TERMUX_PREFIX@/usr/bin/ld: LD "))
 	vers := string(bytes.Split(out, []byte("("))[0])
 	subvers := strings.Split(vers, ".")
 	if len(subvers) != 3 {

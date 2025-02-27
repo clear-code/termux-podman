@@ -5,5 +5,5 @@ const (
 	NoBaseImageSpecifier = "scratch"
 
 	// in docker/system
-	defaultPathEnv = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+	defaultPathEnv = "@TERMUX_PREFIX@/usr/local/sbin:@TERMUX_PREFIX@/usr/local/bin:@TERMUX_PREFIX@/usr/sbin:@TERMUX_PREFIX@/usr/bin:@TERMUX_PREFIX@/sbin:@TERMUX_PREFIX@/bin"
 )

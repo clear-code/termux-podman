@@ -24,8 +24,8 @@ func (q *QEMUStubber) addArchOptions(_ *setNewMachineCMDOpts) []string {
 
 func getQemuUefiFile(name string) string {
 	dirs := []string{
-		"/usr/share/qemu-efi-aarch64",
-		"/usr/share/edk2/aarch64",
+		"@TERMUX_PREFIX@/usr/share/qemu-efi-aarch64",
+		"@TERMUX_PREFIX@/usr/share/edk2/aarch64",
 	}
 	for _, dir := range dirs {
 		if err := fileutils.Exists(dir); err == nil {

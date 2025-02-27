@@ -463,7 +463,7 @@ func InitFSMounts(mounts []spec.Mount) error {
 }
 
 func addReadWriteTmpfsMounts(mounts map[string]spec.Mount, volumes []*specgen.NamedVolume, runPath string) map[string]spec.Mount {
-	readonlyTmpfs := []string{"/tmp", "/var/tmp", runPath}
+	readonlyTmpfs := []string{"@TERMUX_PREFIX@/tmp", "@TERMUX_PREFIX@/var/tmp", runPath}
 	options := []string{"rw", "rprivate", "nosuid", "nodev", "tmpcopyup"}
 	for _, dest := range readonlyTmpfs {
 		if _, ok := mounts[dest]; ok {

@@ -402,16 +402,16 @@ func createContainerOptions(rt *libpod.Runtime, s *specgen.SpecGenerator, pod *l
 
 		if len(command) > 0 {
 			useSystemdCommands := map[string]bool{
-				"/sbin/init":           true,
-				"/usr/sbin/init":       true,
-				"/usr/local/sbin/init": true,
+				"@TERMUX_PREFIX@/sbin/init":           true,
+				"@TERMUX_PREFIX@/usr/sbin/init":       true,
+				"@TERMUX_PREFIX@/usr/local/sbin/init": true,
 			}
 			// Grab last command in case this is launched from a shell
 			cmd := command
 			if len(command) > 2 {
 				// Podman build will add "/bin/sh" "-c" to
 				// Entrypoint. Remove and search for systemd
-				if command[0] == "/bin/sh" && command[1] == "-c" {
+				if command[0] == "@TERMUX_PREFIX@/bin/sh" && command[1] == "-c" {
 					cmd = command[2:]
 				}
 			}

@@ -285,7 +285,7 @@ func executePodTemplate(info *podInfo, options entities.GenerateSystemdOptions) 
 	if info.Executable == "" {
 		executable, err := os.Executable()
 		if err != nil {
-			executable = "/usr/bin/podman"
+			executable = "@TERMUX_PREFIX@/usr/bin/podman"
 			logrus.Warnf("Could not obtain podman executable location, using default %s: %v", executable, err)
 		}
 		info.Executable = executable

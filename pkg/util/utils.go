@@ -1167,7 +1167,7 @@ func ExitCode(err error) int {
 func Tmpdir() string {
 	tmpdir := os.Getenv("TMPDIR")
 	if tmpdir == "" {
-		tmpdir = "/var/tmp"
+		tmpdir = "@TERMUX_PREFIX@/var/tmp"
 	}
 
 	return tmpdir

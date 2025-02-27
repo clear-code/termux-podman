@@ -44,7 +44,7 @@ type playKubeOptionsWrapper struct {
 
 var (
 	// https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/
-	defaultSeccompRoot = "/var/lib/kubelet/seccomp"
+	defaultSeccompRoot = "@TERMUX_PREFIX@/var/lib/kubelet/seccomp"
 	playOptions        = playKubeOptionsWrapper{}
 	playDescription    = `Reads in a structured file of Kubernetes YAML.
 

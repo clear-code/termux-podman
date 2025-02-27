@@ -92,7 +92,7 @@ func Info() ([]InfoStat, error) {
 }
 
 func InfoWithContext(ctx context.Context) ([]InfoStat, error) {
-	const dmesgBoot = "/var/run/dmesg.boot"
+	const dmesgBoot = "@TERMUX_PREFIX@/var/run/dmesg.boot"
 
 	c, err := parseDmesgBoot(dmesgBoot)
 	if err != nil {

@@ -36,7 +36,7 @@ var userRegistriesDir = filepath.FromSlash(".config/containers/registries.d")
 var defaultUserDockerDir = filepath.FromSlash(".local/share/containers/sigstore")
 
 // defaultDockerDir is the default lookaside directory for root
-var defaultDockerDir = "/var/lib/containers/sigstore"
+var defaultDockerDir = "@TERMUX_PREFIX@/var/lib/containers/sigstore"
 
 // registryConfiguration is one of the files in registriesDirPath configuring lookaside locations, or the result of merging them all.
 // NOTE: Keep this in sync with docs/registries.d.md!

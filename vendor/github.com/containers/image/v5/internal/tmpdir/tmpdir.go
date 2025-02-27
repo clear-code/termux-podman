@@ -15,7 +15,7 @@ var unixTempDirForBigFiles = builtinUnixTempDirForBigFiles
 // builtinUnixTempDirForBigFiles is the directory path to store big files.
 // Do not use the system default of os.TempDir(), usually /tmp, because with systemd it could be a tmpfs.
 // DO NOT change this, instead see unixTempDirForBigFiles above.
-const builtinUnixTempDirForBigFiles = "/var/tmp"
+const builtinUnixTempDirForBigFiles = "@TERMUX_PREFIX@/var/tmp"
 
 const prefix = "container_images_"
 

@@ -34,7 +34,7 @@ func ConfigureContainerTimeZone(timezone, containerRunDir, mountPoint, etcPath, 
 		zoneinfo := os.Getenv("TZDIR")
 		if zoneinfo == "" {
 			// default zoneinfo location
-			zoneinfo = "/usr/share/zoneinfo"
+			zoneinfo = "@TERMUX_PREFIX@/usr/share/zoneinfo"
 		}
 		timezonePath = filepath.Join(zoneinfo, timezone)
 	}

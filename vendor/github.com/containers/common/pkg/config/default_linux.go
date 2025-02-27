@@ -14,7 +14,7 @@ func getDefaultTmpDir() string {
 	if path, found := os.LookupEnv("TMPDIR"); found {
 		return path
 	}
-	return "/var/tmp"
+	return "@TERMUX_PREFIX@/var/tmp"
 }
 
 func getDefaultLockType() string {
@@ -22,7 +22,7 @@ func getDefaultLockType() string {
 }
 
 func getLibpodTmpDir() string {
-	return "/run/libpod"
+	return "@TERMUX_PREFIX@/var/run/libpod"
 }
 
 // getDefaultMachineVolumes returns default mounted volumes (possibly with env vars, which will be expanded)

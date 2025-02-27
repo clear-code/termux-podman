@@ -306,7 +306,7 @@ func StartGenericAppleVM(mc *vmconfigs.MachineConfig, cmdBinary string, bootload
 			return nil, nil, err
 		}
 
-		cmd = exec.Command("/usr/bin/open", "-Wa", "Terminal", kdFile.Path)
+		cmd = exec.Command("@TERMUX_PREFIX@/usr/bin/open", "-Wa", "Terminal", kdFile.Path)
 	}
 
 	if err := cmd.Start(); err != nil {

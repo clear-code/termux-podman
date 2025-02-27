@@ -22,5 +22,5 @@ func GetTempDir() string {
 			return tmpdir
 		}
 	}
-	return "/var/tmp"
+	return "@TERMUX_PREFIX@/var/tmp"
 }

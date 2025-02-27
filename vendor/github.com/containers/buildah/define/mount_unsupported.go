@@ -7,7 +7,7 @@ const (
 	TypeBind = "bind"
 
 	// TempDir is the default for storing temporary files
-	TempDir = "/var/tmp"
+	TempDir = "@TERMUX_PREFIX@/var/tmp"
 )
 
 // Mount potions for bind

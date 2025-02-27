@@ -300,7 +300,7 @@ func executeContainerTemplate(info *containerInfo, options entities.GenerateSyst
 	if info.Executable == "" {
 		executable, err := os.Executable()
 		if err != nil {
-			executable = "/usr/bin/podman"
+			executable = "@TERMUX_PREFIX@/usr/bin/podman"
 			logrus.Warnf("Could not obtain podman executable location, using default %s", executable)
 		}
 		info.Executable = executable

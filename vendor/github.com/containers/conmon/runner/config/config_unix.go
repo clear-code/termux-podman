@@ -3,5 +3,5 @@
 package config
 
 const (
-	ContainerAttachSocketDir = "/var/run/crio"
+	ContainerAttachSocketDir = "@TERMUX_PREFIX@/var/run/crio"
 )

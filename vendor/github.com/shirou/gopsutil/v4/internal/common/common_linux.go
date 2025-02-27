@@ -282,7 +282,7 @@ func VirtualizationWithContext(ctx context.Context) (string, string, error) {
 			} else if StringsContains(contents, "machine-rkt") {
 				system = "rkt"
 				role = "guest"
-			} else if PathExists("/usr/bin/lxc-version") {
+			} else if PathExists("@TERMUX_PREFIX@/usr/bin/lxc-version") {
 				system = "lxc"
 				role = "host"
 			}

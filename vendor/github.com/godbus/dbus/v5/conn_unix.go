@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-const defaultSystemBusAddress = "unix:path=/var/run/dbus/system_bus_socket"
+const defaultSystemBusAddress = "unix:path=@TERMUX_PREFIX@/var/run/dbus/system_bus_socket"
 
 func getSystemBusPlatformAddress() string {
 	address := os.Getenv("DBUS_SYSTEM_BUS_ADDRESS")

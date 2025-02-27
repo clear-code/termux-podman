@@ -6,14 +6,14 @@ import (
 
 const (
 	// OverrideContainersConfig holds the default config path overridden by the root user
-	OverrideContainersConfig = "/etc/" + _configPath
+	OverrideContainersConfig = "@TERMUX_PREFIX@/etc/" + _configPath
 
 	// DefaultContainersConfig holds the default containers config path
-	DefaultContainersConfig = "/usr/share/" + _configPath
+	DefaultContainersConfig = "@TERMUX_PREFIX@/share/" + _configPath
 
 	// DefaultSignaturePolicyPath is the default value for the
 	// policy.json file.
-	DefaultSignaturePolicyPath = "/etc/containers/policy.json"
+	DefaultSignaturePolicyPath = "@TERMUX_PREFIX@/etc/containers/policy.json"
 )
 
 func selinuxEnabled() bool {
@@ -21,8 +21,8 @@ func selinuxEnabled() bool {
 }
 
 var defaultHelperBinariesDir = []string{
-	"/usr/local/libexec/podman",
-	"/usr/local/lib/podman",
-	"/usr/libexec/podman",
-	"/usr/lib/podman",
+	"@TERMUX_PREFIX@/local/libexec/podman",
+	"@TERMUX_PREFIX@/local/lib/podman",
+	"@TERMUX_PREFIX@/libexec/podman",
+	"@TERMUX_PREFIX@/lib/podman",
 }

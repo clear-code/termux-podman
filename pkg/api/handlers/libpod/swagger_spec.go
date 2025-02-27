@@ -13,7 +13,7 @@ import (
 )
 
 // DefaultPodmanSwaggerSpec provides the default path to the podman swagger spec file
-const DefaultPodmanSwaggerSpec = "/usr/share/containers/podman/swagger.yaml"
+const DefaultPodmanSwaggerSpec = "@TERMUX_PREFIX@/usr/share/containers/podman/swagger.yaml"
 
 func ServeSwagger(w http.ResponseWriter, r *http.Request) {
 	path := DefaultPodmanSwaggerSpec

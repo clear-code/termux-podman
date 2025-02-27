@@ -78,47 +78,47 @@ var (
 		[]byte("<? "),
 	)
 	phpScriptF = shebang(
-		[]byte("/usr/local/bin/php"),
-		[]byte("/usr/bin/php"),
-		[]byte("/usr/bin/env php"),
+		[]byte("@TERMUX_PREFIX@/usr/local/bin/php"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/php"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env php"),
 	)
 	// Js matches a Javascript file.
 	Js = shebang(
-		[]byte("/bin/node"),
-		[]byte("/usr/bin/node"),
-		[]byte("/bin/nodejs"),
-		[]byte("/usr/bin/nodejs"),
-		[]byte("/usr/bin/env node"),
-		[]byte("/usr/bin/env nodejs"),
+		[]byte("@TERMUX_PREFIX@/bin/node"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/node"),
+		[]byte("@TERMUX_PREFIX@/bin/nodejs"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/nodejs"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env node"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env nodejs"),
 	)
 	// Lua matches a Lua programming language file.
 	Lua = shebang(
-		[]byte("/usr/bin/lua"),
-		[]byte("/usr/local/bin/lua"),
-		[]byte("/usr/bin/env lua"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/lua"),
+		[]byte("@TERMUX_PREFIX@/usr/local/bin/lua"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env lua"),
 	)
 	// Perl matches a Perl programming language file.
 	Perl = shebang(
-		[]byte("/usr/bin/perl"),
-		[]byte("/usr/bin/env perl"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/perl"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env perl"),
 	)
 	// Python matches a Python programming language file.
 	Python = shebang(
-		[]byte("/usr/bin/python"),
-		[]byte("/usr/local/bin/python"),
-		[]byte("/usr/bin/env python"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/python"),
+		[]byte("@TERMUX_PREFIX@/usr/local/bin/python"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env python"),
 	)
 	// Tcl matches a Tcl programming language file.
 	Tcl = shebang(
-		[]byte("/usr/bin/tcl"),
-		[]byte("/usr/local/bin/tcl"),
-		[]byte("/usr/bin/env tcl"),
-		[]byte("/usr/bin/tclsh"),
-		[]byte("/usr/local/bin/tclsh"),
-		[]byte("/usr/bin/env tclsh"),
-		[]byte("/usr/bin/wish"),
-		[]byte("/usr/local/bin/wish"),
-		[]byte("/usr/bin/env wish"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/tcl"),
+		[]byte("@TERMUX_PREFIX@/usr/local/bin/tcl"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env tcl"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/tclsh"),
+		[]byte("@TERMUX_PREFIX@/usr/local/bin/tclsh"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env tclsh"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/wish"),
+		[]byte("@TERMUX_PREFIX@/usr/local/bin/wish"),
+		[]byte("@TERMUX_PREFIX@/usr/bin/env wish"),
 	)
 	// Rtf matches a Rich Text Format file.
 	Rtf = prefix([]byte("{\\rtf1"))

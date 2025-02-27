@@ -16,8 +16,8 @@ import (
 )
 
 const (
-	defaultPrefix = "/usr/local"
-	dockerSock    = "/var/run/docker.sock"
+	defaultPrefix = "@TERMUX_PREFIX@/usr/local"
+	dockerSock    = "@TERMUX_PREFIX@/var/run/docker.sock"
 )
 
 var installPrefix string
@@ -59,7 +59,7 @@ func main() {
 func getUserInfo(name string) (string, string, string, error) {
 	// We exec id instead of using user.Lookup to remain compat
 	// with CGO disabled.
-	cmd := exec.Command("/usr/bin/id", "-P", name)
+	cmd := exec.Command("@TERMUX_PREFIX@/usr/bin/id", "-P", name)
 	output, err := cmd.StdoutPipe()
 	if err != nil {
 		return "", "", "", err
