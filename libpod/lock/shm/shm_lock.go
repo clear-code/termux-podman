@@ -1,4 +1,4 @@
-//go:build (linux || freebsd) && cgo
+//go:build ((linux && !android) || freebsd) && cgo
 
 package shm
 
