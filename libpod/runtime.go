@@ -13,7 +13,7 @@ import (
 	"slices"
 	"strings"
 	"sync"
-	"syscall"
+	_ "syscall"
 	"time"
 
 	"github.com/containers/buildah/pkg/parse"
@@ -252,6 +252,7 @@ func getLockManager(runtime *Runtime) (lock.Manager, error) {
 			}
 		}
 
+	/*
 	case "", "shm":
 		lockPath := define.DefaultSHMLockPath
 		if rootless.IsRootless() {
@@ -284,6 +285,7 @@ func getLockManager(runtime *Runtime) (lock.Manager, error) {
 				return nil, err
 			}
 		}
+	*/
 	default:
 		return nil, fmt.Errorf("unknown lock type %s: %w", runtime.config.Engine.LockType, define.ErrInvalidArg)
 	}
